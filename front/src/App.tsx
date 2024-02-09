@@ -1,17 +1,18 @@
 import { ToastContainer } from 'react-toastify';
 import { GlobalStyles } from './globalStyle';
 import "react-toastify/dist/ReactToastify.css";
-import Header from './components/Header';
+import LandingPage from './LandingPage';
 
 function App() {
 
   return (
     <>
-      <Header/>
-      <GlobalStyles />
+      <LandingPage/>
       <ToastContainer/>
-    </>
+      <GlobalStyles/>
+    </>  
   )
+
 }
 
 export default App
