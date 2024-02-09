@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     list-style: none;
     text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Nunito Sans";
   }
 
   button {

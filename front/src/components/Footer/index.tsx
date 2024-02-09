@@ -5,13 +5,13 @@ import RST from "../../assets/RST-logo.png";
 const Footer = () => {
   return (
     <StyledFooter>
-      <div>
-        <img src={PEPSICO} alt="pepsico-title" />
-        <p>© Copyright 2023 - PepsiCo </p>
+      <div className="divtop__footer">
+        <img className="pepsico-title" src={PEPSICO} alt="pepsico-title" />
+        <p className="copyright-text">© Copyright 2023 - PepsiCo </p>
       </div>
-      <div>
+      <div className="divbottom__footer">
         <div>
-          <img src={RST} alt="rst-logo" />
+          <img className="rst__logo" src={RST} alt="rst-logo" />
           <p>Plataforma de transmissão completa de eventos.</p>
         </div>
         <div>
