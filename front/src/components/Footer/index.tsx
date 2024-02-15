@@ -8,6 +8,7 @@ const Footer = () => {
       <div className="divtop__footer">
         <img className="pepsico-title" src={PEPSICO} alt="pepsico-title" />
         <p className="copyright-text">© Copyright 2023 - PepsiCo </p>
+        <a href="">Dúvidas sobre o evento? WhatsApp: (11) 99775-9828</a>
       </div>
       <div className="divbottom__footer">
         <div>
