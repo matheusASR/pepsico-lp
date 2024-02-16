@@ -17,13 +17,16 @@ const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
 
   return (
     <>
-      <h2>Dados Pepsico</h2>
-      <form>
-        <input type="text" placeholder="Nome Completo *" />
-        <input type="text" placeholder="GPID *" />
-        <input type="text" placeholder="E-mail *" />
-        <input type="text" placeholder="Departamento *" />
-        <select name="" id="">
+      <div className="form__register__top">
+        <h2>Dados Pepsico</h2>
+        <p>Step 2/6</p>
+      </div>
+      <form className="pepsico__form">
+        <input className="regular__input" type="text" placeholder="Nome Completo *" />
+        <input className="regular__input" type="text" placeholder="GPID *" />
+        <input className="regular__input" type="text" placeholder="E-mail *" />
+        <input className="regular__input" type="text" placeholder="Departamento *" />
+        <select className="regular__input" name="" id="">
           <option value="">Região*</option>
           {opcoesRegiao.map((opcao, index) => (
             <option key={index} value={opcao}>
@@ -31,7 +34,7 @@ const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
             </option>
           ))}
         </select>
-        <select name="" id="">
+        <select className="regular__input" name="" id="">
           <option value="">Nível*</option>
           {todasOpcoes.map((opcao, index) => (
             <option key={index} value={opcao}>
@@ -40,9 +43,9 @@ const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
           ))}
         </select>
       </form>
-      <div>
-        <button onClick={handleBackYes}>VOLTAR</button>
-        <button onClick={handleNextYes}>CONTINUAR</button>
+      <div className="div__bttns">
+        <button className="back__bttn" onClick={handleBackYes}>VOLTAR</button>
+        <button className="continue__bttn" onClick={handleNextYes}>CONTINUAR</button>
       </div>
     </>
   );
