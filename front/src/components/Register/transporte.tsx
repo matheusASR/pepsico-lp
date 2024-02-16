@@ -14,15 +14,15 @@ const Transporte = ({ handleBackYes, handleNextYes }: any) => {
             <option value="Não">Não</option>
           </select>
         </label>
+        <div className="div__bttns">
+          <button className="back__bttn" onClick={handleBackYes}>
+            VOLTAR
+          </button>
+          <button className="continue__bttn" onClick={handleNextYes}>
+            CONTINUAR
+          </button>
+        </div>
       </form>
-      <div className="div__bttns">
-        <button className="back__bttn" onClick={handleBackYes}>
-          VOLTAR
-        </button>
-        <button className="continue__bttn" onClick={handleNextYes}>
-          CONTINUAR
-        </button>
-      </div>
     </>
   );
 };

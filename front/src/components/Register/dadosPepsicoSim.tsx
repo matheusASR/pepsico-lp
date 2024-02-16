@@ -1,4 +1,4 @@
-const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
+const DadosPepsicoSim = ({ handleNextYes, handleBackYes }: any) => {
   const opcoesL = Array.from({ length: 11 }, (_, i) => `L${i + 1}`);
   const opcoesLG = Array.from({ length: 5 }, (_, i) => `LG${i + 1}`);
   const todasOpcoes = [...opcoesL, ...opcoesLG];
@@ -22,10 +22,18 @@ const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
         <p>Step 2/6</p>
       </div>
       <form className="pepsico__form">
-        <input className="regular__input" type="text" placeholder="Nome Completo *" />
+        <input
+          className="regular__input"
+          type="text"
+          placeholder="Nome Completo *"
+        />
         <input className="regular__input" type="text" placeholder="GPID *" />
         <input className="regular__input" type="text" placeholder="E-mail *" />
-        <input className="regular__input" type="text" placeholder="Departamento *" />
+        <input
+          className="regular__input"
+          type="text"
+          placeholder="Departamento *"
+        />
         <select className="regular__input" name="" id="">
           <option value="">Região*</option>
           {opcoesRegiao.map((opcao, index) => (
@@ -42,11 +50,15 @@ const DadosPepsicoSim = ({handleNextYes, handleBackYes}: any) => {
             </option>
           ))}
         </select>
+        <div className="div__bttns">
+          <button className="back__bttn" onClick={handleBackYes}>
+            VOLTAR
+          </button>
+          <button className="continue__bttn" onClick={handleNextYes}>
+            CONTINUAR
+          </button>
+        </div>
       </form>
-      <div className="div__bttns">
-        <button className="back__bttn" onClick={handleBackYes}>VOLTAR</button>
-        <button className="continue__bttn" onClick={handleNextYes}>CONTINUAR</button>
-      </div>
     </>
   );
 };

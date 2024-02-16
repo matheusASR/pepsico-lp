@@ -1,4 +1,4 @@
-const DadosPessoais = ({handleNextYes, handleBackYes}: any) => {
+const DadosPessoais = ({ handleNextYes, handleBackYes }: any) => {
   const generos = ["Masculino", "Feminino", "Outro"];
   const tamanhos = ["P", "M", "G", "GG", "EXG"];
 
@@ -11,7 +11,11 @@ const DadosPessoais = ({handleNextYes, handleBackYes}: any) => {
       <form className="personal__form">
         <input className="regular__input" type="text" placeholder="RG *" />
         <input className="regular__input" type="text" placeholder="CPF *" />
-        <input className="regular__input" type="text" placeholder="Data de Nascimento *" />
+        <input
+          className="regular__input"
+          type="text"
+          placeholder="Data de Nascimento *"
+        />
         <select className="regular__input" name="" id="">
           <option value="">Gênero *</option>
           {generos.map((opcao, index) => (
@@ -38,11 +42,15 @@ const DadosPessoais = ({handleNextYes, handleBackYes}: any) => {
           <option>Sim (Especifique)</option>
           <option>Não</option>
         </select>
+        <div className="div__bttns">
+          <button className="back__bttn" onClick={handleBackYes}>
+            VOLTAR
+          </button>
+          <button className="continue__bttn" onClick={handleNextYes}>
+            CONTINUAR
+          </button>
+        </div>
       </form>
-      <div className="div__bttns">
-        <button className="back__bttn" onClick={handleBackYes}>VOLTAR</button>
-        <button className="continue__bttn" onClick={handleNextYes}>CONTINUAR</button>
-      </div>
     </>
   );
 };

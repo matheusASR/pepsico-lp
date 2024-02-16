@@ -5,7 +5,7 @@ const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setC
         <h2 className="form__register__title">Confirmação de Presença</h2>
         <p className="form__register__step">Step 1/{step}</p>
       </div>
-      <form onSubmit={handleConfirmacaoSubmit} className="form__confirm">
+      <form className="form__confirm">
         <label>
           Você confirma a sua presença no evento?
           <select
@@ -26,7 +26,7 @@ const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setC
             <option value="Não">Não</option>
           </select>
         </label>
-        <button className="continue__bttn" type="submit">
+        <button className="continue__bttn" onClick={handleConfirmacaoSubmit}>
           CONTINUAR
         </button>
       </form>

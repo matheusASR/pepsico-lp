@@ -1,4 +1,4 @@
-const Declinio = ({handleBackNo}: any) => {
+const Declinio = ({ handleBackNo }: any) => {
   return (
     <>
       <div className="form__register__top">
@@ -8,13 +8,15 @@ const Declinio = ({handleBackNo}: any) => {
       <form className="decline__form">
         <label>Informe o motivo do declínio. *</label>
         <input className="textarea__input" type="textarea" />
+        <div className="div__bttns">
+          <button className="back__bttn" onClick={handleBackNo}>
+            VOLTAR
+          </button>
+          <button className="continue__bttn" type="submit">
+            INSCREVER-SE
+          </button>
+        </div>
       </form>
-      <div className="div__bttns">
-        <button className="back__bttn" onClick={handleBackNo}>
-          VOLTAR
-        </button>
-        <button className="continue__bttn">INSCREVER-SE</button>
-      </div>
     </>
   );
 };

@@ -24,19 +24,23 @@ const Register = () => {
     }
   };
 
-  const handleNextYes = () => {
+  const handleNextYes = (e: any) => {
+    e.preventDefault();
     setEtapaSim(etapaSim + 1);
   };
 
-  const handleNextNo = () => {
+  const handleNextNo = (e: any) => {
+    e.preventDefault();
     setEtapaNao(etapaNao + 1);
   };
 
-  const handleBackYes = () => {
+  const handleBackYes = (e: any) => {
+    e.preventDefault();
     setEtapaSim(etapaSim - 1);
   };
 
-  const handleBackNo = () => {
+  const handleBackNo = (e: any) => {
+    e.preventDefault();
     setEtapaNao(etapaNao - 1);
   };
 
@@ -45,7 +49,9 @@ const Register = () => {
       <div className="register__title__box">
         <h1 className="register__title">Inscreva-se</h1>
       </div>
-      <div className="form__register__box">
+      <div
+        className="form__register__box"
+      >
         {etapaSim === 1 && etapaNao === 1 ? (
           <Confirmacao
             handleConfirmacaoSubmit={handleConfirmacaoSubmit}

@@ -16,13 +16,15 @@ const DuvidasSugestoes = ({ handleBackYes }: any) => {
           Declaro que concordo com as Política de Privacidade RSTCom e Termos e
           Condições de Uso RSTCom
         </p>
+        <div className="div__bttns">
+          <button className="back__bttn" onClick={handleBackYes}>
+            VOLTAR
+          </button>
+          <button className="continue__bttn" type="submit">
+            INSCREVER-SE
+          </button>
+        </div>
       </form>
-      <div className="div__bttns">
-        <button className="back__bttn" onClick={handleBackYes}>
-          VOLTAR
-        </button>
-        <button className="continue__bttn">INSCREVER-SE</button>
-      </div>
     </>
   );
 };
