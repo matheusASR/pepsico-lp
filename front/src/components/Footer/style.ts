@@ -69,4 +69,16 @@ export const StyledFooter = styled.footer`
   .underline {
     text-decoration: underline;
   }
+  @media (min-width: 800px) {
+    .divtop__footer {
+      flex-direction: row;
+      height: 200px;
+    }
+    .divbottom__footer {
+      flex-direction: row;
+      justify-content: center;
+      height: 100px;
+      padding-bottom: 20px;
+    }
+  }
 `;
