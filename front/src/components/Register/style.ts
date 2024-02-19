@@ -6,16 +6,21 @@ export const StyledRegister = styled.section`
   flex-direction: column;
   align-items: center;
   .register__title__box {
-    height: 140px;
+    padding-top: 100px;
+    padding-bottom: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
   }
   .register__title {
-    font-size: 25px;
+    font-size: 35px;
   }
   .form__register__box {
-    width: 90%;
+    width: 80%;
+    border: 1px solid grey;
+    padding: 20px;
+    border-radius: 5px;
   }
   .form__register__top {
     height: 40px;
@@ -27,6 +32,7 @@ export const StyledRegister = styled.section`
     width: 100%;
     height: 30px;
     border: 1px solid black;
+    padding-left: 10px;
   }
   .textarea__input {
     width: 100%;
@@ -53,7 +59,11 @@ export const StyledRegister = styled.section`
     padding: 10px 0px;
     gap: 10px;
   }
-  .contact__form, .personal__form, .pepsico__form, .form__confirm, .transport__form {
+  .contact__form,
+  .personal__form,
+  .pepsico__form,
+  .form__confirm,
+  .transport__form {
     display: flex;
     flex-direction: column;
     gap: 15px;

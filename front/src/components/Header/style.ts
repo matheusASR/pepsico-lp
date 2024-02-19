@@ -7,15 +7,12 @@ export const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   .div__header {
-    width: 85%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0px 15px;
+    padding: 0px 13%;
     align-items: center;
   }
   .pepsico-title {
@@ -30,8 +27,20 @@ export const StyledHeader = styled.header`
     justify-content: center;
 
     .menu-lines {
-        width: 70%;
-        height: 90%;
+      width: 70%;
+      height: 90%;
     }
+  }
+  .menu-lines-box:hover {
+    cursor: pointer;
+  }
+  .x__close {
+    height: 30px;
+    width: 30px;
+  }
+  .div__header__menu {
+    height: 170px;
+    width: 100%;
+    background: linear-gradient(90deg, rgb(4, 67, 146) 0%, rgb(197, 41, 88) 90%);
   }
 `;
