@@ -3,7 +3,7 @@ import PepsicoSmallBanner from "../../assets/pepsico-img-small.jpg";
 
 const About = () => {
   return (
-    <StyledAbout>
+    <StyledAbout id="section2">
       <div className="div__about">
         <h1 className="title__about">
           Chegou a hora de dar mais um grande passo no mercado.

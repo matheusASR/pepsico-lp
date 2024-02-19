@@ -45,7 +45,7 @@ const Register = () => {
   };
 
   return (
-    <StyledRegister>
+    <StyledRegister id="section3">
       <div className="register__title__box">
         <h1 className="register__title">Inscreva-se</h1>
       </div>

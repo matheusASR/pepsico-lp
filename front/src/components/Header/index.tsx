@@ -15,6 +15,19 @@ const Header = () => {
     setMenuBar(false);
   };
 
+  const scrollToSection = (id: any) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = 100;
+      const targetY =
+        section.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({
+        behavior: "smooth",
+        top: targetY,
+      });
+    }
+  };
+
   return (
     <StyledHeader>
       {menuBar ? (
@@ -31,9 +44,24 @@ const Header = () => {
             </div>
           </div>
           <div className="div__header__menu">
-            <button className="pattern__style">Início</button>
-            <button className="pattern__style">Sobre</button>
-            <button className="pattern__style">Inscrição</button>
+            <button
+              onClick={() => scrollToSection("section1")}
+              className="pattern__style"
+            >
+              Início
+            </button>
+            <button
+              onClick={() => scrollToSection("section2")}
+              className="pattern__style"
+            >
+              Sobre
+            </button>
+            <button
+              onClick={() => scrollToSection("section3")}
+              className="pattern__style"
+            >
+              Inscrição
+            </button>
           </div>
         </>
       ) : (
@@ -44,9 +72,24 @@ const Header = () => {
               <img className="menu-lines" src={MenuLines} alt="menu-lines" />
             </div>
             <div className="menu__header__desktop">
-              <button className="pattern__style2">Início</button>
-              <button className="pattern__style2">Sobre</button>
-              <button className="pattern__style2">Inscrição</button>
+              <button
+                onClick={() => scrollToSection("section1")}
+                className="pattern__style2"
+              >
+                Início
+              </button>
+              <button
+                onClick={() => scrollToSection("section2")}
+                className="pattern__style2"
+              >
+                Sobre
+              </button>
+              <button
+                onClick={() => scrollToSection("section3")}
+                className="pattern__style2"
+              >
+                Inscrição
+              </button>
             </div>
           </div>
         </>
