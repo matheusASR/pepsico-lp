@@ -5,6 +5,7 @@ import About from "../components/About";
 import Register from "../components/Register";
 import Footer from "../components/Footer";
 import ARROWTOP from "../assets/ARROWTOP.png";
+import Cookies from "../components/Cookies";
 
 const LandingPage = () => {
   const scrollToSection = (id: any) => {
@@ -42,6 +43,7 @@ const LandingPage = () => {
         />
       </button>
       <Footer />
+      <Cookies/>
     </StyledLandingPage>
   );
 };
