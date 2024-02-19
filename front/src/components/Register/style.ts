@@ -74,7 +74,7 @@ export const StyledRegister = styled.section`
     margin-top: 25px;
   }
   .back__bttn {
-    width: 30%;
+    width: 90px;
     background-color: white;
     color: black;
     letter-spacing: 2px;
@@ -85,7 +85,7 @@ export const StyledRegister = styled.section`
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
   .continue__bttn {
-    width: 35%;
+    width: 120px;
     background-color: white;
     color: #6c757d;
     letter-spacing: 2px;

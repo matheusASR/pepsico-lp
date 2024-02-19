@@ -65,6 +65,7 @@ export const StyledFooter = styled.footer`
     justify-content: center;
     text-align: center;
     gap: 15px;
+    max-width: 85%;
   }
   .underline {
     text-decoration: underline;
