@@ -2,20 +2,37 @@ const DuvidasSugestoes = ({ handleBackYes }: any) => {
   return (
     <>
       <div className="form__register__top">
-        <h2>Dúvidas ou Sugestões</h2>
-        <p>Step 6/6</p>
+        <h2 className="form__register__title">Dúvidas ou Sugestões</h2>
+        <p className="form__register__step">
+          Step <strong className="form__register__step">6</strong>/6
+        </p>
       </div>
-      <h2>Use este campo para:</h2>
+      <br></br>
+      <h2 className="doubt__text uppercase">Use este campo para:</h2>
       <div className="div__column">
-        <p>Sugerir colega de quarto</p>
-        <p>Dúvidas ou Sugestões</p>
+        <p className="doubt__text">* Sugerir colega de quarto</p>
+        <p className="doubt__text">* Dúvidas ou Sugestões</p>
       </div>
       <form>
         <input className="textarea__input" type="textarea" />
-        <p>
-          Declaro que concordo com as Política de Privacidade RSTCom e Termos e
-          Condições de Uso RSTCom
-        </p>
+        <label className="politics__text">
+          <input type="checkbox" /> Declaro que concordo com as{" "}
+          <a
+            className="underline"
+            target="blank"
+            href="https://4yourlive.com/%20gigacolaboradores/privacy-and-policy"
+          >
+            Política de Privacidade RSTCom
+          </a>{" "}
+          e{" "}
+          <a
+            className="underline"
+            target="blank"
+            href="https://4yourlive.com/%20gigacolaboradores/terms-of-use"
+          >
+            Termos e Condições de Uso RSTCom
+          </a>
+        </label>
         <div className="div__bttns">
           <button className="back__bttn" onClick={handleBackYes}>
             VOLTAR

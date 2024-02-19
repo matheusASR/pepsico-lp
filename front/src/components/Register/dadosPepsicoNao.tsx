@@ -18,38 +18,54 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
   return (
     <>
       <div className="form__register__top">
-        <h2>Dados Pepsico</h2>
-        <p>Step 2/3</p>
+        <h2 className="form__register__title">Dados Pepsico</h2>
+        <p className="form__register__step">
+          Step <strong className="form__register__step">2</strong>/3
+        </p>
       </div>
       <form className="pepsico__form">
-        <input
-          className="regular__input"
-          type="text"
-          placeholder="Nome Completo *"
-        />
-        <input className="regular__input" type="text" placeholder="GPID *" />
-        <input className="regular__input" type="text" placeholder="E-mail *" />
-        <input
-          className="regular__input"
-          type="text"
-          placeholder="Departamento *"
-        />
-        <select className="regular__input" name="" id="">
-          <option value="">Região*</option>
-          {opcoesRegiao.map((opcao, index) => (
-            <option key={index} value={opcao}>
-              {opcao}
-            </option>
-          ))}
-        </select>
-        <select className="regular__input" name="" id="">
-          <option value="">Nível*</option>
-          {todasOpcoes.map((opcao, index) => (
-            <option key={index} value={opcao}>
-              {opcao}
-            </option>
-          ))}
-        </select>
+        <div className="responsive__div">
+          <div className="responsive__input">
+            <input
+              className="regular__input"
+              type="text"
+              placeholder="Nome Completo *"
+            />
+            <input
+              className="regular__input"
+              type="text"
+              placeholder="GPID *"
+            />
+            <input
+              className="regular__input"
+              type="text"
+              placeholder="E-mail *"
+            />
+          </div>
+          <div className="responsive__input">
+            <input
+              className="regular__input"
+              type="text"
+              placeholder="Departamento *"
+            />
+            <select className="regular__input" name="" id="">
+              <option value="">Região*</option>
+              {opcoesRegiao.map((opcao, index) => (
+                <option key={index} value={opcao}>
+                  {opcao}
+                </option>
+              ))}
+            </select>
+            <select className="regular__input" name="" id="">
+              <option value="">Nível*</option>
+              {todasOpcoes.map((opcao, index) => (
+                <option key={index} value={opcao}>
+                  {opcao}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <div className="div__bttns">
           <button className="back__bttn" onClick={handleBackNo}>
             VOLTAR

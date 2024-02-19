@@ -31,7 +31,9 @@ const Header = () => {
             </div>
           </div>
           <div className="div__header__menu">
-
+            <button className="pattern__style">Início</button>
+            <button className="pattern__style">Sobre</button>
+            <button className="pattern__style">Inscrição</button>
           </div>
         </>
       ) : (
@@ -40,6 +42,11 @@ const Header = () => {
             <img className="pepsico-title" src={PEPSICO} alt="pepsico-title" />
             <div onClick={openMenuBar} className="menu-lines-box">
               <img className="menu-lines" src={MenuLines} alt="menu-lines" />
+            </div>
+            <div className="menu__header__desktop">
+              <button className="pattern__style2">Início</button>
+              <button className="pattern__style2">Sobre</button>
+              <button className="pattern__style2">Inscrição</button>
             </div>
           </div>
         </>

@@ -3,10 +3,10 @@ const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setC
     <>
       <div className="form__register__top">
         <h2 className="form__register__title">Confirmação de Presença</h2>
-        <p className="form__register__step">Step 1/{step}</p>
+        <p className="form__register__step">Step <strong className="form__register__step">1</strong>/{step}</p>
       </div>
       <form className="form__confirm">
-        <label>
+        <label className="label__pattern">
           Você confirma a sua presença no evento?
           <select
             name="confirmacao"
@@ -19,16 +19,18 @@ const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setC
                 setStep(3);
               }
             }}
-            className="regular__input"
+            className="regular__input input__confirm"
           >
             <option value="">Selecione</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </label>
-        <button className="continue__bttn" onClick={handleConfirmacaoSubmit}>
-          CONTINUAR
-        </button>
+        <div className="align__end">
+          <button className="continue__bttn" onClick={handleConfirmacaoSubmit}>
+            CONTINUAR
+          </button>
+        </div>
       </form>
     </>
   );
