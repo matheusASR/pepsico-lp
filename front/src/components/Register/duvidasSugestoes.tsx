@@ -10,8 +10,8 @@ const DuvidasSugestoes = ({ handleBackYes }: any) => {
       <br></br>
       <h2 className="doubt__text uppercase">Use este campo para:</h2>
       <div className="div__column">
-        <p className="doubt__text">* Sugerir colega de quarto</p>
-        <p className="doubt__text">* Dúvidas ou Sugestões</p>
+        <p className="doubt__text">•⁠ Sugerir colega de quarto</p>
+        <p className="doubt__text">•⁠ ⁠Dúvidas e sugestões</p>
       </div>
       <form>
         <input className="textarea__input" type="textarea" />

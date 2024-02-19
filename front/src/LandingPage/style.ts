@@ -7,15 +7,16 @@ export const StyledLandingPage = styled.div`
     margin: 80px 0px;
   }
   .gotop__bttn {
-    background-color: #044392;
-    height: 30px;
-    width: 30px;
-    border-radius: 5px;
     position: fixed;
     right: 50px;
     bottom: 85px;
+    background-color: transparent;
   }
-  .gotop__bttn:hover {
-    background-color: #c52958;
+  .arrow__top {
+    height: 40px;
+    width: 40px;
+  }
+  .hide {
+    display: none;
   }
 `;

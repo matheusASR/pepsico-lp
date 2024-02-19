@@ -78,12 +78,14 @@ const Header = () => {
               >
                 Início
               </button>
+              <p>•</p>
               <button
                 onClick={() => scrollToSection("section2")}
                 className="pattern__style2"
               >
                 Sobre
               </button>
+              <p>•</p>
               <button
                 onClick={() => scrollToSection("section3")}
                 className="pattern__style2"
