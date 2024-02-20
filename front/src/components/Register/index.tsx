@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyledRegister } from "./style";
 import DadosPessoais from "./DadosPessoais/dadosPessoais";
 import DadosContato from "./DadosContato/dadosContato";
@@ -8,6 +8,7 @@ import Declinio from "./declinio";
 import DuvidasSugestoes from "./duvidasSugestoes";
 import Transporte from "./transporte";
 import Confirmacao from "./confirmacao";
+import { FormContext } from "../../providers/FormContext";
 
 const Register = () => {
   const [confirmacao, setConfirmacao] = useState("");
@@ -15,6 +16,7 @@ const Register = () => {
   const [etapaSim, setEtapaSim] = useState(1);
   const [etapaNao, setEtapaNao] = useState(1);
   const [finalFormData, setFinalFormData] = useState({});
+  const { formData, setFormData} = useContext(FormContext)
 
   useEffect(() => {
     console.log(finalFormData);
@@ -24,13 +26,15 @@ const Register = () => {
     e.preventDefault();
     if (confirmacao === "Sim") {
       setEtapaSim(2);
-      setFinalFormData({
+      setFormData({
+        ...formData,
         confirmacao: "Sim"
       })
       console.log(finalFormData)
     } else {
       setEtapaNao(2);
-      setFinalFormData({
+      setFormData({
+        ...formData,
         confirmacao: "Não"
       })
     }
@@ -110,6 +114,8 @@ const Register = () => {
           <Declinio
             setFinalFormData={setFinalFormData}
             finalFormData={finalFormData}
+            setEtapaNao={setEtapaNao}
+            etapaNao={etapaNao}
           />
         )}
       </div>

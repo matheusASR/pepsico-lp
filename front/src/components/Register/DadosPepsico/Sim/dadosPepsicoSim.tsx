@@ -1,9 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  TDadosPepsicoSimValues,
-  dadosPepsicoSimSchema,
-} from "./dadosPepsicoSimSchema";
+import { useContext } from "react";
+import { FormContext } from "../../../../providers/FormContext.tsx"
 
 const DadosPepsicoSim = ({
   setEtapaSim,
@@ -27,23 +23,16 @@ const DadosPepsicoSim = ({
     "ÁREA CONVIDADA",
   ];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TDadosPepsicoSimValues>({
-    resolver: zodResolver(dadosPepsicoSimSchema),
-  });
+  const { formData, setFormData } = useContext(FormContext);
 
-  const submitFormRegister: SubmitHandler<TDadosPepsicoSimValues> = async (
-    formData
-  ) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     setEtapaSim(etapaSim + 1);
     setFinalFormData({ ...finalFormData, ...formData });
   };
 
   const backBttn = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     const formKey = "dadosPepsicoSim";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };
@@ -51,6 +40,28 @@ const DadosPepsicoSim = ({
       setFinalFormData(updatedFinalFormData);
     }
     setEtapaSim(etapaSim - 1);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      dadosPepsicoSim: {
+        ...formData.dadosPepsicoSim,
+        [name]: value,
+      },
+    });
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      dadosPepsicoSim: {
+        ...formData.dadosPepsicoSim,
+        [name]: value,
+      },
+    });
   };
 
   return (
@@ -61,53 +72,48 @@ const DadosPepsicoSim = ({
           Step <strong className="form__register__step">2</strong>/6
         </p>
       </div>
-      <form
-        className="pepsico__form"
-        onSubmit={handleSubmit(submitFormRegister)}
-      >
+      <form className="pepsico__form" onSubmit={handleSubmit}>
         <div className="responsive__div">
           <div className="responsive__input">
             <input
               className="regular__input"
               type="text"
               placeholder="Nome Completo *"
-              {...register("dadosPepsicoSim.nomeCompleto")}
+              value={formData.dadosPepsicoSim.nomeCompleto}
+              onChange={handleInputChange}
+              name="nomeCompleto"
             />
-            {errors.dadosPepsicoSim?.nomeCompleto && (
-              <p>{errors.dadosPepsicoSim.nomeCompleto.message}</p>
-            )}
             <input
               className="regular__input"
               type="text"
               placeholder="GPID *"
-              {...register("dadosPepsicoSim.gpid")}
+              value={formData.dadosPepsicoSim.gpid}
+              onChange={handleInputChange}
+              name="gpid"
             />
-            {errors.dadosPepsicoSim?.gpid && (
-              <p>{errors.dadosPepsicoSim.gpid.message}</p>
-            )}
             <input
               className="regular__input"
               type="text"
               placeholder="E-mail *"
-              {...register("dadosPepsicoSim.email")}
+              value={formData.dadosPepsicoSim.email}
+              onChange={handleInputChange}
+              name="email"
             />
-            {errors.dadosPepsicoSim?.email && (
-              <p>{errors.dadosPepsicoSim.email.message}</p>
-            )}
           </div>
           <div className="responsive__input">
             <input
               className="regular__input"
               type="text"
               placeholder="Departamento *"
-              {...register("dadosPepsicoSim.departamento")}
+              value={formData.dadosPepsicoSim.departamento}
+              onChange={handleInputChange}
+              name="departamento"
             />
-            {errors.dadosPepsicoSim?.departamento && (
-              <p>{errors.dadosPepsicoSim.departamento.message}</p>
-            )}
             <select
               className="regular__input"
-              {...register("dadosPepsicoSim.regiao")}
+              value={formData.dadosPepsicoSim.regiao}
+              onChange={handleSelectChange}
+              name="regiao"
             >
               <option value="">Região*</option>
               {opcoesRegiao.map((opcao, index) => (
@@ -116,12 +122,11 @@ const DadosPepsicoSim = ({
                 </option>
               ))}
             </select>
-            {errors.dadosPepsicoSim?.regiao && (
-              <p>{errors.dadosPepsicoSim.regiao.message}</p>
-            )}
             <select
               className="regular__input"
-              {...register("dadosPepsicoSim.nivel")}
+              value={formData.dadosPepsicoSim.nivel}
+              onChange={handleSelectChange}
+              name="nivel"
             >
               <option value="">Nível*</option>
               {todasOpcoes.map((opcao, index) => (
@@ -130,9 +135,6 @@ const DadosPepsicoSim = ({
                 </option>
               ))}
             </select>
-            {errors.dadosPepsicoSim?.nivel && (
-              <p>{errors.dadosPepsicoSim.nivel.message}</p>
-            )}
           </div>
         </div>
         <div className="div__bttns">

@@ -1,21 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { TDadosContatoValues, dadosContatoSchema } from "./dadosContatoSchema";
+import { useContext } from "react";
+import { FormContext } from "../../../providers/FormContext";
+
 
 const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TDadosContatoValues>({
-    resolver: zodResolver(dadosContatoSchema),
-  });
+  const { formData, setFormData } = useContext(FormContext);
 
-  const submitFormRegister: SubmitHandler<TDadosContatoValues> = async (
-    formData
-  ) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     setEtapaSim(etapaSim + 1);
-    setFinalFormData({...finalFormData, ...formData})
+    setFinalFormData({ ...finalFormData, ...formData });
   };
 
   const backBttn = (e:any) => {
@@ -29,6 +22,17 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
     setEtapaSim(etapaSim - 1);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      dadosContato: {
+        ...formData.dadosContato,
+        [name]: value,
+      },
+    });
+  };
+
   return (
     <>
       <div className="form__register__top">
@@ -37,46 +41,58 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
           Step <strong className="form__register__step">4</strong>/6
         </p>
       </div>
-      <form className="contact__form" onSubmit={handleSubmit(submitFormRegister)}>
+      <form className="contact__form" onSubmit={handleSubmit}>
         <div className="responsive__div">
           <div className="responsive__input contact1">
             <input
               className="regular__input"
               type="number"
               placeholder="CEP *"
-              {...register("dadosContato.cep")}
+              value={formData.dadosContato.cep}
+              onChange={handleInputChange}
+              name="cep"
             />
             <input
               className="regular__input"
               type="text"
               placeholder="Endereço *"
-              {...register("dadosContato.endereco")}
+              value={formData.dadosContato.endereco}
+              onChange={handleInputChange}
+              name="endereco"
             />
             <div className="num__comp">
               <input
                 className="regular__input number"
                 type="number"
                 placeholder="Número *"
-                {...register("dadosContato.numero")}
+                value={formData.dadosContato.numero}
+                onChange={handleInputChange}
+                name="numero"
               />
               <input
                 className="regular__input comp"
                 type="text"
                 placeholder="Complemento"
-                {...register("dadosContato.complemento")}
+                value={formData.dadosContato.complemento}
+                onChange={handleInputChange}
+                name="complemento"
               />
             </div>
             <input
               className="regular__input"
               type="text"
               placeholder="Bairro *"
-              {...register("dadosContato.bairro")}
+              value={formData.dadosContato.bairro}
+              onChange={handleInputChange}
+              name="bairro"
             />
             <input
               className="regular__input"
               type="text"
               placeholder="Cidade *"
-              {...register("dadosContato.cidade")}
+              value={formData.dadosContato.cidade}
+              onChange={handleInputChange}
+              name="cidade"
             />
           </div>
           <div className="responsive__input">
@@ -84,13 +100,17 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               className="regular__input"
               type="text"
               placeholder="Estado *"
-              {...register("dadosContato.estado")}
+              value={formData.dadosContato.estado}
+              onChange={handleInputChange}
+              name="estado"
             />
             <input
               className="regular__input"
               type="number"
               placeholder="Telefone para contato *"
-              {...register("dadosContato.telefoneContato")}
+              value={formData.dadosContato.telefoneContato}
+              onChange={handleInputChange}
+              name="telefoneContato"
             />
             <span className="span__contact">
               Digite apenas números incluindo o DDD
@@ -99,7 +119,9 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               className="regular__input"
               type="text"
               placeholder="Contato de Emergência *"
-              {...register("dadosContato.contatoEmergencia")}
+              value={formData.dadosContato.contatoEmergencia}
+              onChange={handleInputChange}
+              name="contatoEmergencia"
             />
             <span className="span__contact">
               Ex:. Nome completo (Parentesco)
@@ -108,7 +130,9 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               className="regular__input"
               type="number"
               placeholder="Telefone para emergência *"
-              {...register("dadosContato.telefoneEmergencia")}
+              value={formData.dadosContato.telefoneEmergencia}
+              onChange={handleInputChange}
+              name="telefoneEmergencia"
             />
             <span className="span__contact">
               Digite apenas números incluindo o DDD

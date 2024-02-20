@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { FormContext } from "../../providers/FormContext";
+
 
 const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: any) => {
-  const [reason, setReason] = useState("");
+  const { formData, setFormData } = useContext(FormContext);
 
-  const handleReasonChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { value } = event.target;
-    setReason(value);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setFinalFormData({ ...finalFormData, ...formData });
+    const filteredFormData = Object.fromEntries(
+      Object.entries(finalFormData).filter(([, value]) => {
+        if (typeof value === 'object' && value !== null) {
+          const nestedEntries = Object.entries(value);
+          const filteredNestedEntries = nestedEntries.filter(([_, nestedValue]) => nestedValue !== '');
+          return filteredNestedEntries.length > 0;
+        } else {
+          return value !== '';
+        }
+      })
+    );
+  
+    setFinalFormData(filteredFormData);
+    console.log(filteredFormData);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFinalFormData({ ...finalFormData, motivoDeclinio: reason });
-  };
 
   const backBttn = (e:any) => {
     e.preventDefault()
@@ -24,6 +34,16 @@ const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: an
       setFinalFormData(updatedFinalFormData);
     }
     setEtapaNao(etapaNao - 1);
+  };
+
+  const handleTextareaChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { value } = e.target;
+    setFormData({
+      ...formData,
+      motivoDeclinio: value,
+    });
   };
 
   return (
@@ -40,8 +60,9 @@ const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: an
         </label>
         <textarea
           className="textarea__input"
-          value={reason}
-          onChange={handleReasonChange}
+          value={formData.motivoDeclinio}
+          onChange={handleTextareaChange}
+          name="motivoDeclinio"
           required
         />
         <div className="div__bttns">

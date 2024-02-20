@@ -1,22 +1,55 @@
-import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { FormContext } from "../../providers/FormContext";
 
-const DuvidasSugestoes = ({ finalFormData, setFinalFormData, setEtapaSim, etapaSim }: any) => {
-  const { register, handleSubmit } = useForm();
+const DuvidasSugestoes = ({
+  finalFormData,
+  setFinalFormData,
+  setEtapaSim,
+  etapaSim,
+}: any) => {
+  const { formData, setFormData } = useContext(FormContext);
 
-  const onSubmit = (data: any) => {
-    setFinalFormData({...finalFormData, ...data})
-    console.log(finalFormData)
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setFinalFormData({ ...finalFormData, ...formData });
+    const filteredFormData = filterEmptyFields(finalFormData);
+    setFinalFormData(filteredFormData);
+    console.log(filteredFormData);
   };
 
-  const backBttn = (e:any) => {
-    e.preventDefault()
-    const formKey = "duvidasSugestoes";
+  const filterEmptyFields = (data: any) => {
+    const filteredData: any = {};
+    for (const key in data) {
+      if (typeof data[key] === 'object' && data[key] !== null) {
+        filteredData[key] = filterEmptyFields(data[key]);
+      } else {
+        if (data[key] !== '') {
+          filteredData[key] = data[key];
+        }
+      }
+    }
+    return filteredData;
+  };
+
+  const backBttn = (e: any) => {
+    e.preventDefault();
+    const formKey = "duvidaSugestao";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };
       delete updatedFinalFormData[formKey];
       setFinalFormData(updatedFinalFormData);
     }
     setEtapaSim(etapaSim - 1);
+  };
+
+  const handleTextareaChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { value } = e.target;
+    setFormData({
+      ...formData,
+      duvidaSugestao: value,
+    });
   };
 
   return (
@@ -33,10 +66,15 @@ const DuvidasSugestoes = ({ finalFormData, setFinalFormData, setEtapaSim, etapaS
         <p className="doubt__text">•⁠ Sugerir colega de quarto</p>
         <p className="doubt__text">•⁠ ⁠Dúvidas e sugestões</p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <textarea className="textarea__input" {...register("duvidaSugestao")} />
+      <form onSubmit={handleSubmit}>
+        <textarea
+          className="textarea__input"
+          value={formData.duvidaSugestao}
+          onChange={handleTextareaChange}
+          name="duvidaSugestao"
+        />
         <label className="politics__text">
-          <input type="checkbox" required/> Declaro que concordo com as{" "}
+          <input type="checkbox" required /> Declaro que concordo com as{" "}
           <a
             className="underline"
             target="blank"

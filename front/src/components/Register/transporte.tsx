@@ -1,11 +1,14 @@
-import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { FormContext } from "../../providers/FormContext";
+
 
 const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
-  const { register, handleSubmit } = useForm();
+  const { formData, setFormData } = useContext(FormContext);
 
-  const onSubmit = (data: any) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
     setEtapaSim(etapaSim + 1)
-    setFinalFormData({...finalFormData, transporte: {...data}})
+    setFinalFormData({...finalFormData, ...formData})
   };
 
   const backBttn = (e:any) => {
@@ -19,6 +22,17 @@ const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: 
     setEtapaSim(etapaSim - 1);
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      transporte: {
+        ...formData.transporte,
+        [name]: value,
+      },
+    });
+  };
+
   return (
     <>
       <div className="form__register__top">
@@ -27,12 +41,15 @@ const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: 
           Step <strong className="form__register__step">5</strong>/6
         </p>
       </div>
-      <form className="transport__form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="transport__form" onSubmit={handleSubmit}>
         <label className="label__pattern">
           Necessita de transporte aéreo?
           <select
             className="regular__input input__transport"
-            {...register("necessitaTransporteAereo", { required: true })}
+            value={formData.transporte.necessitaTransporteAereo}
+            onChange={handleSelectChange}
+            name="necessitaTransporteAereo"
+            required
           >
             <option value="">Selecione... *</option>
             <option value="Sim">Sim</option>
@@ -43,7 +60,10 @@ const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: 
           Como você planeja chegar ao evento?
           <select
             className="regular__input input__transport"
-            {...register("planoChegada", { required: true })}
+            value={formData.transporte.planoChegada}
+            onChange={handleSelectChange}
+            name="planoChegada"
+            required
           >
             <option value="">Selecione... *</option>
             <option value="Transfer fornecido pelo evento (Saída do escritório Único)">

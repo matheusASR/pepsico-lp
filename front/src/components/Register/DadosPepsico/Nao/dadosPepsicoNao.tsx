@@ -1,8 +1,12 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { TDadosPepsicoNaoValues, dadosPepsicoNaoSchema } from "./dadosPepsicoNaoSchema";
+import { useContext } from "react";
+import { FormContext } from "../../../../providers/FormContext.tsx"
 
-const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormData }: any) => {
+const DadosPepsicoNao = ({
+  setEtapaNao,
+  etapaNao,
+  setFinalFormData,
+  finalFormData,
+}: any) => {
   const opcoesL = Array.from({ length: 11 }, (_, i) => `L${i + 1}`);
   const opcoesLG = Array.from({ length: 5 }, (_, i) => `LG${i + 1}`);
   const todasOpcoes = [...opcoesL, ...opcoesLG];
@@ -19,8 +23,16 @@ const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormDat
     "ÁREA CONVIDADA",
   ];
 
+  const { formData, setFormData } = useContext(FormContext);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setEtapaNao(etapaNao + 1);
+    setFinalFormData({ ...finalFormData, ...formData });
+  };
+
   const backBttn = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     const formKey = "dadosPepsicoNao";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };
@@ -30,19 +42,26 @@ const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormDat
     setEtapaNao(etapaNao - 1);
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TDadosPepsicoNaoValues>({
-    resolver: zodResolver(dadosPepsicoNaoSchema),
-  });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      dadosPepsicoNao: {
+        ...formData.dadosPepsicoNao,
+        [name]: value,
+      },
+    });
+  };
 
-  const submitFormRegister: SubmitHandler<TDadosPepsicoNaoValues> = async (
-    formData
-  ) => {
-    setEtapaNao(etapaNao + 1);
-    setFinalFormData({...finalFormData, ...formData})
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      dadosPepsicoNao: {
+        ...formData.dadosPepsicoNao,
+        [name]: value,
+      },
+    });
   };
 
   return (
@@ -53,26 +72,32 @@ const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormDat
           Step <strong className="form__register__step">2</strong>/3
         </p>
       </div>
-      <form className="pepsico__form" onSubmit={handleSubmit(submitFormRegister)}>
+      <form className="pepsico__form" onSubmit={handleSubmit}>
         <div className="responsive__div">
           <div className="responsive__input">
             <input
               className="regular__input"
               type="text"
               placeholder="Nome Completo *"
-              {...register("dadosPepsicoNao.nomeCompleto")}
+              value={formData.dadosPepsicoNao.nomeCompleto}
+              onChange={handleInputChange}
+              name="nomeCompleto"
             />
             <input
               className="regular__input"
               type="text"
               placeholder="GPID *"
-              {...register("dadosPepsicoNao.gpid")}
+              value={formData.dadosPepsicoNao.gpid}
+              onChange={handleInputChange}
+              name="gpid"
             />
             <input
               className="regular__input"
               type="text"
               placeholder="E-mail *"
-              {...register("dadosPepsicoNao.email")}
+              value={formData.dadosPepsicoNao.email}
+              onChange={handleInputChange}
+              name="email"
             />
           </div>
           <div className="responsive__input">
@@ -80,9 +105,16 @@ const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormDat
               className="regular__input"
               type="text"
               placeholder="Departamento *"
-              {...register("dadosPepsicoNao.departamento")}
+              value={formData.dadosPepsicoNao.departamento}
+              onChange={handleInputChange}
+              name="departamento"
             />
-            <select className="regular__input" {...register("dadosPepsicoNao.regiao")}>
+            <select
+              className="regular__input"
+              value={formData.dadosPepsicoNao.regiao}
+              onChange={handleSelectChange}
+              name="regiao"
+            >
               <option value="">Região*</option>
               {opcoesRegiao.map((opcao, index) => (
                 <option key={index} value={opcao}>
@@ -90,7 +122,12 @@ const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormDat
                 </option>
               ))}
             </select>
-            <select className="regular__input" {...register("dadosPepsicoNao.nivel")}>
+            <select
+              className="regular__input"
+              value={formData.dadosPepsicoNao.nivel}
+              onChange={handleSelectChange}
+              name="nivel"
+            >
               <option value="">Nível*</option>
               {todasOpcoes.map((opcao, index) => (
                 <option key={index} value={opcao}>
