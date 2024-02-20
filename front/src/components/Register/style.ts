@@ -88,6 +88,10 @@ export const StyledRegister = styled.section`
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
+  .back__bttn:hover, .continue__bttn:hover {
+    background-color: #044392;
+    color: white;
+  }
   .continue__bttn {
     width: 120px;
     background-color: white;
