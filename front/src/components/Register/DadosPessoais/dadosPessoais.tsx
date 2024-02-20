@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FormContext } from "../../../providers/FormContext";
 
 const DadosPessoais = ({
@@ -9,6 +9,8 @@ const DadosPessoais = ({
 }: any) => {
   const generos = ["Masculino", "Feminino", "Outro"];
   const tamanhos = ["P", "M", "G", "GG", "EXG"];
+  const [foodRestriction, setFoodRestriction] = useState(false);
+  const [needHelp, setNeedHelp] = useState(false);
 
   const { formData, setFormData } = useContext(FormContext);
 
@@ -126,26 +128,57 @@ const DadosPessoais = ({
             <select
               className="regular__input"
               value={formData.dadosPessoais.restricaoAlimentar}
-              onChange={handleSelectChange}
+              onChange={(e) => {
+                handleSelectChange(e);
+                if (e.target.value === "Sim") {
+                  setFoodRestriction(true);
+                }
+              }}
               name="restricaoAlimentar"
               required
             >
               <option value="">Possui alguma restrição alimentar? *</option>
-              <option>Sim (Especifique)</option>
-              <option>Não</option>
+              <option value="Sim">Sim (Especifique)</option>
+              <option value="Não">Não</option>
             </select>
-
+            {foodRestriction ? (
+              <input
+                className="regular__input"
+                type="text"
+                placeholder="Razão"
+                value={formData.dadosPessoais.restricaoAlimentarRazao}
+                onChange={handleInputChange}
+                name="restricaoAlimentarRazao"
+                required
+              />
+            ) : null}
             <select
               className="regular__input"
               value={formData.dadosPessoais.necessidade}
-              onChange={handleSelectChange}
+              onChange={(e) => {
+                handleSelectChange(e);
+                if (e.target.value === "Sim") {
+                  setNeedHelp(true);
+                }
+              }}
               name="necessidade"
               required
             >
               <option value="">Possui alguma necessidade? *</option>
-              <option>Sim (Especifique)</option>
-              <option>Não</option>
+              <option value="Sim">Sim (Especifique)</option>
+              <option value="Não">Não</option>
             </select>
+            {needHelp ? (
+              <input
+                className="regular__input"
+                type="text"
+                placeholder="Razão"
+                value={formData.dadosPessoais.necessidadeRazao}
+                onChange={handleInputChange}
+                name="necessidadeRazao"
+                required
+              />
+            ) : null}
           </div>
         </div>
         <div className="div__bttns">

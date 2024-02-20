@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyledRegister } from "./style";
 import DadosPessoais from "./DadosPessoais/dadosPessoais";
 import DadosContato from "./DadosContato/dadosContato";
@@ -31,6 +31,10 @@ const Register = () => {
     }
     return filteredData;
   };
+
+  useEffect(() => {
+    console.log(finalFormData)
+  }, [finalFormData]);
 
   const clearFormData = (data: any) => {
     for (const key in data) {

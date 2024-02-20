@@ -16,7 +16,9 @@ interface DadosPessoais {
   genero: string;
   tamanhoCamiseta: string;
   restricaoAlimentar: string;
+  restricaoAlimentarRazao?: string;
   necessidade: string;
+  necessidadeRazao?: string;
 }
 
 interface DadosContato {
@@ -77,7 +79,9 @@ export const FormContext = createContext<FormContextType>({
       genero: "",
       tamanhoCamiseta: "",
       restricaoAlimentar: "",
+      restricaoAlimentarRazao: "",
       necessidade: "",
+      necessidadeRazao: "",
     },
     dadosContato: {
       cep: "",
@@ -126,7 +130,9 @@ export const FormProvider = ({ children }: any) => {
       genero: "",
       tamanhoCamiseta: "",
       restricaoAlimentar: "",
+      restricaoAlimentarRazao: "",
       necessidade: "",
+      necessidadeRazao: "",
     },
     dadosContato: {
       cep: "",
