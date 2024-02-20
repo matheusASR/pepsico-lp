@@ -51,6 +51,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.cep}
               onChange={handleInputChange}
               name="cep"
+              required
             />
             <input
               className="regular__input"
@@ -59,6 +60,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.endereco}
               onChange={handleInputChange}
               name="endereco"
+              required
             />
             <div className="num__comp">
               <input
@@ -68,6 +70,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
                 value={formData.dadosContato.numero}
                 onChange={handleInputChange}
                 name="numero"
+                required
               />
               <input
                 className="regular__input comp"
@@ -76,6 +79,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
                 value={formData.dadosContato.complemento}
                 onChange={handleInputChange}
                 name="complemento"
+                required
               />
             </div>
             <input
@@ -85,6 +89,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.bairro}
               onChange={handleInputChange}
               name="bairro"
+              required
             />
             <input
               className="regular__input"
@@ -93,6 +98,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.cidade}
               onChange={handleInputChange}
               name="cidade"
+              required
             />
           </div>
           <div className="responsive__input">
@@ -103,6 +109,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.estado}
               onChange={handleInputChange}
               name="estado"
+              required
             />
             <input
               className="regular__input"
@@ -111,6 +118,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.telefoneContato}
               onChange={handleInputChange}
               name="telefoneContato"
+              required
             />
             <span className="span__contact">
               Digite apenas números incluindo o DDD
@@ -122,6 +130,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.contatoEmergencia}
               onChange={handleInputChange}
               name="contatoEmergencia"
+              required
             />
             <span className="span__contact">
               Ex:. Nome completo (Parentesco)
@@ -133,6 +142,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
               value={formData.dadosContato.telefoneEmergencia}
               onChange={handleInputChange}
               name="telefoneEmergencia"
+              required
             />
             <span className="span__contact">
               Digite apenas números incluindo o DDD

@@ -77,6 +77,7 @@ const DuvidasSugestoes = ({
           value={formData.duvidaSugestao}
           onChange={handleTextareaChange}
           name="duvidaSugestao"
+          required
         />
         <label className="politics__text">
           <input type="checkbox" required /> Declaro que concordo com as{" "}

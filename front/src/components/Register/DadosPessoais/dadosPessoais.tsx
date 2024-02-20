@@ -69,6 +69,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.rg}
               onChange={handleInputChange}
               name="rg"
+              required
             />
 
             <input
@@ -78,6 +79,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.cpf}
               onChange={handleInputChange}
               name="cpf"
+              required
             />
 
             <input
@@ -87,6 +89,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.dataNascimento}
               onChange={handleInputChange}
               name="dataNascimento"
+              required
             />
 
             <select
@@ -94,6 +97,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.genero}
               onChange={handleSelectChange}
               name="genero"
+              required
             >
               <option value="">Gênero *</option>
               {generos.map((opcao, index) => (
@@ -109,6 +113,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.tamanhoCamiseta}
               onChange={handleSelectChange}
               name="tamanhoCamiseta"
+              required
             >
               <option value="">Tamanho de Camiseta *</option>
               {tamanhos.map((opcao, index) => (
@@ -123,6 +128,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.restricaoAlimentar}
               onChange={handleSelectChange}
               name="restricaoAlimentar"
+              required
             >
               <option value="">Possui alguma restrição alimentar? *</option>
               <option>Sim (Especifique)</option>
@@ -134,6 +140,7 @@ const DadosPessoais = ({
               value={formData.dadosPessoais.necessidade}
               onChange={handleSelectChange}
               name="necessidade"
+              required
             >
               <option value="">Possui alguma necessidade? *</option>
               <option>Sim (Especifique)</option>

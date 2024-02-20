@@ -82,6 +82,7 @@ const DadosPepsicoSim = ({
               value={formData.dadosPepsicoSim.nomeCompleto}
               onChange={handleInputChange}
               name="nomeCompleto"
+              required
             />
             <input
               className="regular__input"
@@ -90,6 +91,7 @@ const DadosPepsicoSim = ({
               value={formData.dadosPepsicoSim.gpid}
               onChange={handleInputChange}
               name="gpid"
+              required
             />
             <input
               className="regular__input"
@@ -98,6 +100,7 @@ const DadosPepsicoSim = ({
               value={formData.dadosPepsicoSim.email}
               onChange={handleInputChange}
               name="email"
+              required
             />
           </div>
           <div className="responsive__input">
@@ -108,12 +111,14 @@ const DadosPepsicoSim = ({
               value={formData.dadosPepsicoSim.departamento}
               onChange={handleInputChange}
               name="departamento"
+              required
             />
             <select
               className="regular__input"
               value={formData.dadosPepsicoSim.regiao}
               onChange={handleSelectChange}
               name="regiao"
+              required
             >
               <option value="">Região*</option>
               {opcoesRegiao.map((opcao, index) => (
@@ -127,6 +132,7 @@ const DadosPepsicoSim = ({
               value={formData.dadosPepsicoSim.nivel}
               onChange={handleSelectChange}
               name="nivel"
+              required
             >
               <option value="">Nível*</option>
               {todasOpcoes.map((opcao, index) => (

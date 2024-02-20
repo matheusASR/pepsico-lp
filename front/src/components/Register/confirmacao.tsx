@@ -20,6 +20,7 @@ const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setC
               }
             }}
             className="regular__input input__confirm"
+            required
           >
             <option value="">Selecione</option>
             <option value="Sim">Sim</option>
