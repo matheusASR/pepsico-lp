@@ -5,7 +5,12 @@ import {
   dadosPepsicoSimSchema,
 } from "./dadosPepsicoSimSchema";
 
-const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
+const DadosPepsicoSim = ({
+  setEtapaSim,
+  etapaSim,
+  setFinalFormData,
+  finalFormData,
+}: any) => {
   const opcoesL = Array.from({ length: 11 }, (_, i) => `L${i + 1}`);
   const opcoesLG = Array.from({ length: 5 }, (_, i) => `LG${i + 1}`);
   const todasOpcoes = [...opcoesL, ...opcoesLG];
@@ -34,8 +39,18 @@ const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
     formData
   ) => {
     setEtapaSim(etapaSim + 1);
-    console.log("foi");
-    console.log(formData);
+    setFinalFormData({ ...finalFormData, ...formData });
+  };
+
+  const backBttn = (e: any) => {
+    e.preventDefault()
+    const formKey = "dadosPepsicoSim";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaSim(etapaSim - 1);
   };
 
   return (
@@ -58,21 +73,27 @@ const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
               placeholder="Nome Completo *"
               {...register("dadosPepsicoSim.nomeCompleto")}
             />
-            {errors.dadosPepsicoSim?.nomeCompleto && <p>{errors.dadosPepsicoSim.nomeCompleto.message}</p>}
+            {errors.dadosPepsicoSim?.nomeCompleto && (
+              <p>{errors.dadosPepsicoSim.nomeCompleto.message}</p>
+            )}
             <input
               className="regular__input"
               type="text"
               placeholder="GPID *"
               {...register("dadosPepsicoSim.gpid")}
             />
-            {errors.dadosPepsicoSim?.gpid && <p>{errors.dadosPepsicoSim.gpid.message}</p>}
+            {errors.dadosPepsicoSim?.gpid && (
+              <p>{errors.dadosPepsicoSim.gpid.message}</p>
+            )}
             <input
               className="regular__input"
               type="text"
               placeholder="E-mail *"
               {...register("dadosPepsicoSim.email")}
             />
-            {errors.dadosPepsicoSim?.email && <p>{errors.dadosPepsicoSim.email.message}</p>}
+            {errors.dadosPepsicoSim?.email && (
+              <p>{errors.dadosPepsicoSim.email.message}</p>
+            )}
           </div>
           <div className="responsive__input">
             <input
@@ -81,8 +102,13 @@ const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
               placeholder="Departamento *"
               {...register("dadosPepsicoSim.departamento")}
             />
-            {errors.dadosPepsicoSim?.departamento && <p>{errors.dadosPepsicoSim.departamento.message}</p>}
-            <select className="regular__input" {...register("dadosPepsicoSim.regiao")}>
+            {errors.dadosPepsicoSim?.departamento && (
+              <p>{errors.dadosPepsicoSim.departamento.message}</p>
+            )}
+            <select
+              className="regular__input"
+              {...register("dadosPepsicoSim.regiao")}
+            >
               <option value="">Região*</option>
               {opcoesRegiao.map((opcao, index) => (
                 <option key={index} value={opcao}>
@@ -90,8 +116,13 @@ const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
                 </option>
               ))}
             </select>
-            {errors.dadosPepsicoSim?.regiao && <p>{errors.dadosPepsicoSim.regiao.message}</p>}
-            <select className="regular__input" {...register("dadosPepsicoSim.nivel")}>
+            {errors.dadosPepsicoSim?.regiao && (
+              <p>{errors.dadosPepsicoSim.regiao.message}</p>
+            )}
+            <select
+              className="regular__input"
+              {...register("dadosPepsicoSim.nivel")}
+            >
               <option value="">Nível*</option>
               {todasOpcoes.map((opcao, index) => (
                 <option key={index} value={opcao}>
@@ -99,17 +130,16 @@ const DadosPepsicoSim = ({ handleBackYes, setEtapaSim, etapaSim }: any) => {
                 </option>
               ))}
             </select>
-            {errors.dadosPepsicoSim?.nivel && <p>{errors.dadosPepsicoSim.nivel.message}</p>}
+            {errors.dadosPepsicoSim?.nivel && (
+              <p>{errors.dadosPepsicoSim.nivel.message}</p>
+            )}
           </div>
         </div>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackYes}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
-          <button
-            type="submit"
-            className="continue__bttn"
-          >
+          <button type="submit" className="continue__bttn">
             CONTINUAR
           </button>
         </div>

@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TDadosContatoValues, dadosContatoSchema } from "./dadosContatoSchema";
 
-const DadosContato = ({ etapaSim, setEtapaSim, handleBackYes }: any) => {
+const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
   const {
     register,
     handleSubmit,
@@ -15,8 +15,18 @@ const DadosContato = ({ etapaSim, setEtapaSim, handleBackYes }: any) => {
     formData
   ) => {
     setEtapaSim(etapaSim + 1);
-    console.log("foi");
-    console.log(formData);
+    setFinalFormData({...finalFormData, ...formData})
+  };
+
+  const backBttn = (e:any) => {
+    e.preventDefault()
+    const formKey = "dadosContato";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaSim(etapaSim - 1);
   };
 
   return (
@@ -106,7 +116,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, handleBackYes }: any) => {
           </div>
         </div>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackYes}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button type="submit" className="continue__bttn" >

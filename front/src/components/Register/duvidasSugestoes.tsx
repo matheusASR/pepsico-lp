@@ -1,11 +1,22 @@
 import { useForm } from "react-hook-form";
 
-const DuvidasSugestoes = ({ handleBackYes }: any) => {
+const DuvidasSugestoes = ({ finalFormData, setFinalFormData, setEtapaSim, etapaSim }: any) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    console.log("foi")
+    setFinalFormData({...finalFormData, ...data})
+    console.log(finalFormData)
+  };
+
+  const backBttn = (e:any) => {
+    e.preventDefault()
+    const formKey = "duvidasSugestoes";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaSim(etapaSim - 1);
   };
 
   return (
@@ -43,7 +54,7 @@ const DuvidasSugestoes = ({ handleBackYes }: any) => {
           </a>
         </label>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackYes}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button className="continue__bttn" type="submit">

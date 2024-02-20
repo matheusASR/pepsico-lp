@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TDadosPepsicoNaoValues, dadosPepsicoNaoSchema } from "./dadosPepsicoNaoSchema";
 
-const DadosPepsicoNao = ({ handleBackNo, setEtapaNao, etapaNao }: any) => {
+const DadosPepsicoNao = ({ setEtapaNao, etapaNao, setFinalFormData, finalFormData }: any) => {
   const opcoesL = Array.from({ length: 11 }, (_, i) => `L${i + 1}`);
   const opcoesLG = Array.from({ length: 5 }, (_, i) => `LG${i + 1}`);
   const todasOpcoes = [...opcoesL, ...opcoesLG];
@@ -19,6 +19,17 @@ const DadosPepsicoNao = ({ handleBackNo, setEtapaNao, etapaNao }: any) => {
     "ÁREA CONVIDADA",
   ];
 
+  const backBttn = (e: any) => {
+    e.preventDefault()
+    const formKey = "dadosPepsicoNao";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaNao(etapaNao - 1);
+  };
+
   const {
     register,
     handleSubmit,
@@ -31,8 +42,7 @@ const DadosPepsicoNao = ({ handleBackNo, setEtapaNao, etapaNao }: any) => {
     formData
   ) => {
     setEtapaNao(etapaNao + 1);
-    console.log("foi");
-    console.log(formData);
+    setFinalFormData({...finalFormData, ...formData})
   };
 
   return (
@@ -91,7 +101,7 @@ const DadosPepsicoNao = ({ handleBackNo, setEtapaNao, etapaNao }: any) => {
           </div>
         </div>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackNo}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button type="submit" className="continue__bttn">

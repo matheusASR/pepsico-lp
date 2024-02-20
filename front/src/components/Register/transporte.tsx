@@ -1,12 +1,22 @@
 import { useForm } from "react-hook-form";
 
-const Transporte = ({ handleBackYes, etapaSim, setEtapaSim }: any) => {
+const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
     setEtapaSim(etapaSim + 1)
-    console.log(data);
-    console.log("foi")
+    setFinalFormData({...finalFormData, transporte: {...data}})
+  };
+
+  const backBttn = (e:any) => {
+    e.preventDefault()
+    const formKey = "transporte";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaSim(etapaSim - 1);
   };
 
   return (
@@ -43,7 +53,7 @@ const Transporte = ({ handleBackYes, etapaSim, setEtapaSim }: any) => {
           </select>
         </label>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackYes}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button type="submit" className="continue__bttn">

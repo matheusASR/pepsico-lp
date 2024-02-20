@@ -1,29 +1,43 @@
 import { useState } from "react";
 
-const Declinio = ({ handleBackNo }: any) => {
-  const [reason, setReason] = useState('');
+const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: any) => {
+  const [reason, setReason] = useState("");
+
+  const handleReasonChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { value } = event.target;
+    setReason(value);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("foi")
-    console.log({
-      motivoDeclinio: reason
-    });
+    setFinalFormData({ ...finalFormData, motivoDeclinio: reason });
   };
 
-  const handleReasonChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = event.target;
-    setReason(value);
+  const backBttn = (e:any) => {
+    e.preventDefault()
+    const formKey = "motivoDeclinio";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaNao(etapaNao - 1);
   };
 
   return (
     <>
       <div className="form__register__top">
         <h2 className="form__register__title">Motivo</h2>
-        <p className="form__register__step">Step <strong className="form__register__step">3</strong>/3</p>
+        <p className="form__register__step">
+          Step <strong className="form__register__step">3</strong>/3
+        </p>
       </div>
       <form className="decline__form" onSubmit={handleSubmit}>
-        <label className="label__pattern">Informe o motivo do declínio. *</label>
+        <label className="label__pattern">
+          Informe o motivo do declínio. *
+        </label>
         <textarea
           className="textarea__input"
           value={reason}
@@ -31,7 +45,7 @@ const Declinio = ({ handleBackNo }: any) => {
           required
         />
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackNo}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button className="continue__bttn" type="submit">

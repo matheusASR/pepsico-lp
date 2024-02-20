@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TDadosPessoaisValues, dadosPessoaisSchema } from "./dadosPessoaisSchema";
 
-const DadosPessoais = ({ setEtapaSim, etapaSim, handleBackYes }: any) => {
+const DadosPessoais = ({ setEtapaSim, etapaSim, setFinalFormData, finalFormData }: any) => {
   const generos = ["Masculino", "Feminino", "Outro"];
   const tamanhos = ["P", "M", "G", "GG", "EXG"];
 
@@ -18,8 +18,18 @@ const DadosPessoais = ({ setEtapaSim, etapaSim, handleBackYes }: any) => {
     formData
   ) => {
     setEtapaSim(etapaSim + 1);
-    console.log("foi");
-    console.log(formData);
+    setFinalFormData({...finalFormData, ...formData})
+  };
+
+  const backBttn = (e:any) => {
+    e.preventDefault()
+    const formKey = "dadosPessoais";
+    if (finalFormData.hasOwnProperty(formKey)) {
+      const updatedFinalFormData = { ...finalFormData };
+      delete updatedFinalFormData[formKey];
+      setFinalFormData(updatedFinalFormData);
+    }
+    setEtapaSim(etapaSim - 1);
   };
 
   return (
@@ -79,7 +89,7 @@ const DadosPessoais = ({ setEtapaSim, etapaSim, handleBackYes }: any) => {
           </div>
         </div>
         <div className="div__bttns">
-          <button className="back__bttn" onClick={handleBackYes}>
+          <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
           <button type="submit" className="continue__bttn">

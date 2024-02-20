@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyledRegister } from "./style";
 import DadosPessoais from "./DadosPessoais/dadosPessoais";
 import DadosContato from "./DadosContato/dadosContato";
@@ -14,35 +14,26 @@ const Register = () => {
   const [step, setStep] = useState(3);
   const [etapaSim, setEtapaSim] = useState(1);
   const [etapaNao, setEtapaNao] = useState(1);
-  const [finalFormData, setFinalFormData] = useState({}) 
+  const [finalFormData, setFinalFormData] = useState({});
+
+  useEffect(() => {
+    console.log(finalFormData);
+  }, [finalFormData]);
 
   const handleConfirmacaoSubmit = (e: any) => {
     e.preventDefault();
     if (confirmacao === "Sim") {
       setEtapaSim(2);
+      setFinalFormData({
+        confirmacao: "Sim"
+      })
+      console.log(finalFormData)
     } else {
       setEtapaNao(2);
+      setFinalFormData({
+        confirmacao: "Não"
+      })
     }
-  };
-
-  const handleNextYes = (e: any) => {
-    e.preventDefault();
-    setEtapaSim(etapaSim + 1);
-  };
-
-  const handleNextNo = (e: any) => {
-    e.preventDefault();
-    setEtapaNao(etapaNao + 1);
-  };
-
-  const handleBackYes = (e: any) => {
-    e.preventDefault();
-    setEtapaSim(etapaSim - 1);
-  };
-
-  const handleBackNo = (e: any) => {
-    e.preventDefault();
-    setEtapaNao(etapaNao - 1);
   };
 
   return (
@@ -63,52 +54,64 @@ const Register = () => {
 
         {etapaSim === 2 && (
           <DadosPepsicoSim
-            handleNextYes={handleNextYes}
-            handleBackYes={handleBackYes}
             setEtapaSim={setEtapaSim}
             etapaSim={etapaSim}
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
           />
         )}
 
         {etapaSim === 3 && (
           <DadosPessoais
-            handleNextYes={handleNextYes}
-            handleBackYes={handleBackYes}
             setEtapaSim={setEtapaSim}
             etapaSim={etapaSim}
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
           />
         )}
 
         {etapaSim === 4 && (
           <DadosContato
-            handleNextYes={handleNextYes}
-            handleBackYes={handleBackYes}
             setEtapaSim={setEtapaSim}
             etapaSim={etapaSim}
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
           />
         )}
 
         {etapaSim === 5 && (
           <Transporte
-            handleNextYes={handleNextYes}
-            handleBackYes={handleBackYes}
+            setEtapaSim={setEtapaSim}
+            etapaSim={etapaSim}
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
+          />
+        )}
+
+        {etapaSim === 6 && (
+          <DuvidasSugestoes
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
             setEtapaSim={setEtapaSim}
             etapaSim={etapaSim}
           />
         )}
 
-        {etapaSim === 6 && <DuvidasSugestoes handleBackYes={handleBackYes} />}
-
         {etapaNao === 2 && (
           <DadosPepsicoNao
-            handleNextNo={handleNextNo}
-            handleBackNo={handleBackNo}
             setEtapaNao={setEtapaNao}
             etapaNao={etapaNao}
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
           />
         )}
 
-        {etapaNao === 3 && <Declinio handleBackNo={handleBackNo} />}
+        {etapaNao === 3 && (
+          <Declinio
+            setFinalFormData={setFinalFormData}
+            finalFormData={finalFormData}
+          />
+        )}
       </div>
     </StyledRegister>
   );
