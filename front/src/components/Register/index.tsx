@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { StyledRegister } from "./style";
 import DadosPessoais from "./DadosPessoais/dadosPessoais";
 import DadosContato from "./DadosContato/dadosContato";
@@ -16,7 +16,7 @@ const Register = () => {
   const [etapaSim, setEtapaSim] = useState(1);
   const [etapaNao, setEtapaNao] = useState(1);
   const [finalFormData, setFinalFormData] = useState({});
-  const { formData, setFormData } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
 
   const filterEmptyFields = (data: any) => {
     const filteredData: any = {};
@@ -31,10 +31,6 @@ const Register = () => {
     }
     return filteredData;
   };
-
-  useEffect(() => {
-    console.log(finalFormData);
-  }, [finalFormData]);
 
   const clearFormData = (data: any) => {
     for (const key in data) {
@@ -51,18 +47,9 @@ const Register = () => {
     if (confirmacao === "Sim") {
       setEtapaSim(2);
       clearFormData(formData);
-      setFormData({
-        ...formData,
-        confirmacao: "Sim"
-      });
-      console.log(finalFormData);
     } else {
       setEtapaNao(2);
       clearFormData(formData);
-      setFormData({
-        ...formData,
-        confirmacao: "Não",
-      });
     }
   };
 

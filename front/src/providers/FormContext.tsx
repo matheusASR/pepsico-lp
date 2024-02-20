@@ -38,7 +38,6 @@ interface Transporte {
 }
 
 interface FormData {
-  confirmacao: string;
   dadosPepsicoSim: DadosPepsicoSim;
   dadosPepsicoNao: DadosPepsicoSim;
   dadosPessoais: DadosPessoais;
@@ -55,7 +54,6 @@ interface FormContextType {
 
 export const FormContext = createContext<FormContextType>({
   formData: {
-    confirmacao: "",
     dadosPepsicoSim: {
       nomeCompleto: "",
       gpid: "",
@@ -105,7 +103,6 @@ export const FormContext = createContext<FormContextType>({
 
 export const FormProvider = ({ children }: any) => {
   const [formData, setFormData] = useState<FormContextType["formData"]>({
-    confirmacao: "",
     dadosPepsicoSim: {
       nomeCompleto: "",
       gpid: "",
@@ -157,7 +154,3 @@ export const FormProvider = ({ children }: any) => {
     </FormContext.Provider>
   );
 };
-
-
-
-
