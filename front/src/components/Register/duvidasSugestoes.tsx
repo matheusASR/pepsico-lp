@@ -1,4 +1,13 @@
+import { useForm } from "react-hook-form";
+
 const DuvidasSugestoes = ({ handleBackYes }: any) => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    console.log("foi")
+  };
+
   return (
     <>
       <div className="form__register__top">
@@ -13,10 +22,10 @@ const DuvidasSugestoes = ({ handleBackYes }: any) => {
         <p className="doubt__text">•⁠ Sugerir colega de quarto</p>
         <p className="doubt__text">•⁠ ⁠Dúvidas e sugestões</p>
       </div>
-      <form>
-        <input className="textarea__input" type="textarea" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <textarea className="textarea__input" {...register("duvidaSugestao")} />
         <label className="politics__text">
-          <input type="checkbox" /> Declaro que concordo com as{" "}
+          <input type="checkbox" required/> Declaro que concordo com as{" "}
           <a
             className="underline"
             target="blank"

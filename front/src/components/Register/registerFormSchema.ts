@@ -3,7 +3,7 @@ import { z } from "zod"
 export const registerFormSchema = z.object({
     confirmacao: z.string().min(1, "Campo necessário"),
     dadosPepsicoSim: z.object({
-        nomeComplato: z.string().min(1, "Campo necessário"),
+        nomeCompleto: z.string().min(1, "Campo necessário"),
         gpid: z.string().min(1, "Campo necessário"),
         email: z.string().min(1, "Campo necessário").email("Forneça um e-mail válido."),
         departamento: z.string().min(1, "Campo necessário"),

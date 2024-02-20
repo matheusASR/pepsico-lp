@@ -1,4 +1,14 @@
-const Transporte = ({ handleBackYes, handleNextYes }: any) => {
+import { useForm } from "react-hook-form";
+
+const Transporte = ({ handleBackYes, etapaSim, setEtapaSim }: any) => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    setEtapaSim(etapaSim + 1)
+    console.log(data);
+    console.log("foi")
+  };
+
   return (
     <>
       <div className="form__register__top">
@@ -7,10 +17,13 @@ const Transporte = ({ handleBackYes, handleNextYes }: any) => {
           Step <strong className="form__register__step">5</strong>/6
         </p>
       </div>
-      <form className="transport__form">
+      <form className="transport__form" onSubmit={handleSubmit(onSubmit)}>
         <label className="label__pattern">
           Necessita de transporte aéreo?
-          <select className="regular__input input__transport">
+          <select
+            className="regular__input input__transport"
+            {...register("necessitaTransporteAereo", { required: true })}
+          >
             <option value="">Selecione... *</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
@@ -18,19 +31,22 @@ const Transporte = ({ handleBackYes, handleNextYes }: any) => {
         </label>
         <label className="label__pattern">
           Como você planeja chegar ao evento?
-          <select className="regular__input input__transport">
+          <select
+            className="regular__input input__transport"
+            {...register("planoChegada", { required: true })}
+          >
             <option value="">Selecione... *</option>
-            <option value="Sim">
+            <option value="Transfer fornecido pelo evento (Saída do escritório Único)">
               Transfer fornecido pelo evento (Saída do escritório Único)
             </option>
-            <option value="Não">Veículo próprio</option>
+            <option value="Veículo próprio">Veículo próprio</option>
           </select>
         </label>
         <div className="div__bttns">
           <button className="back__bttn" onClick={handleBackYes}>
             VOLTAR
           </button>
-          <button className="continue__bttn" onClick={handleNextYes}>
+          <button type="submit" className="continue__bttn">
             CONTINUAR
           </button>
         </div>

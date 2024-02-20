@@ -1,4 +1,8 @@
-const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { TDadosPepsicoNaoValues, dadosPepsicoNaoSchema } from "./dadosPepsicoNaoSchema";
+
+const DadosPepsicoNao = ({ handleBackNo, setEtapaNao, etapaNao }: any) => {
   const opcoesL = Array.from({ length: 11 }, (_, i) => `L${i + 1}`);
   const opcoesLG = Array.from({ length: 5 }, (_, i) => `LG${i + 1}`);
   const todasOpcoes = [...opcoesL, ...opcoesLG];
@@ -15,6 +19,22 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
     "ÁREA CONVIDADA",
   ];
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TDadosPepsicoNaoValues>({
+    resolver: zodResolver(dadosPepsicoNaoSchema),
+  });
+
+  const submitFormRegister: SubmitHandler<TDadosPepsicoNaoValues> = async (
+    formData
+  ) => {
+    setEtapaNao(etapaNao + 1);
+    console.log("foi");
+    console.log(formData);
+  };
+
   return (
     <>
       <div className="form__register__top">
@@ -23,23 +43,26 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
           Step <strong className="form__register__step">2</strong>/3
         </p>
       </div>
-      <form className="pepsico__form">
+      <form className="pepsico__form" onSubmit={handleSubmit(submitFormRegister)}>
         <div className="responsive__div">
           <div className="responsive__input">
             <input
               className="regular__input"
               type="text"
               placeholder="Nome Completo *"
+              {...register("dadosPepsicoNao.nomeCompleto")}
             />
             <input
               className="regular__input"
               type="text"
               placeholder="GPID *"
+              {...register("dadosPepsicoNao.gpid")}
             />
             <input
               className="regular__input"
               type="text"
               placeholder="E-mail *"
+              {...register("dadosPepsicoNao.email")}
             />
           </div>
           <div className="responsive__input">
@@ -47,8 +70,9 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
               className="regular__input"
               type="text"
               placeholder="Departamento *"
+              {...register("dadosPepsicoNao.departamento")}
             />
-            <select className="regular__input" name="" id="">
+            <select className="regular__input" {...register("dadosPepsicoNao.regiao")}>
               <option value="">Região*</option>
               {opcoesRegiao.map((opcao, index) => (
                 <option key={index} value={opcao}>
@@ -56,7 +80,7 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
                 </option>
               ))}
             </select>
-            <select className="regular__input" name="" id="">
+            <select className="regular__input" {...register("dadosPepsicoNao.nivel")}>
               <option value="">Nível*</option>
               {todasOpcoes.map((opcao, index) => (
                 <option key={index} value={opcao}>
@@ -70,7 +94,7 @@ const DadosPepsicoNao = ({ handleNextNo, handleBackNo }: any) => {
           <button className="back__bttn" onClick={handleBackNo}>
             VOLTAR
           </button>
-          <button className="continue__bttn" onClick={handleNextNo}>
+          <button type="submit" className="continue__bttn">
             CONTINUAR
           </button>
         </div>

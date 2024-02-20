@@ -62,10 +62,14 @@ export const StyledRegister = styled.section`
   }
   .textarea__input {
     width: 100%;
-    height: 150px;
     border: 1px solid #6c757d;
     border-radius: 5px;
     margin-bottom: 20px;
+    font-size: 16px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    height: 150px;
+    padding: 10px;
   }
   .div__bttns {
     width: 100%;

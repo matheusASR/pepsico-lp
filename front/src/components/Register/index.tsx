@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { StyledRegister } from "./style";
-import DadosPessoais from "./dadosPessoais";
-import DadosContato from "./dadosContato";
-import DadosPepsicoNao from "./dadosPepsicoNao";
-import DadosPepsicoSim from "./dadosPepsicoSim";
+import DadosPessoais from "./DadosPessoais/dadosPessoais";
+import DadosContato from "./DadosContato/dadosContato";
+import DadosPepsicoNao from "./DadosPepsico/Nao/dadosPepsicoNao";
+import DadosPepsicoSim from "./DadosPepsico/Sim/dadosPepsicoSim";
 import Declinio from "./declinio";
 import DuvidasSugestoes from "./duvidasSugestoes";
 import Transporte from "./transporte";
@@ -14,6 +14,7 @@ const Register = () => {
   const [step, setStep] = useState(3);
   const [etapaSim, setEtapaSim] = useState(1);
   const [etapaNao, setEtapaNao] = useState(1);
+  const [finalFormData, setFinalFormData] = useState({}) 
 
   const handleConfirmacaoSubmit = (e: any) => {
     e.preventDefault();
@@ -49,9 +50,7 @@ const Register = () => {
       <div className="register__title__box">
         <h1 className="register__title">Inscreva-se</h1>
       </div>
-      <div
-        className="form__register__box"
-      >
+      <div className="form__register__box">
         {etapaSim === 1 && etapaNao === 1 ? (
           <Confirmacao
             handleConfirmacaoSubmit={handleConfirmacaoSubmit}
@@ -66,6 +65,8 @@ const Register = () => {
           <DadosPepsicoSim
             handleNextYes={handleNextYes}
             handleBackYes={handleBackYes}
+            setEtapaSim={setEtapaSim}
+            etapaSim={etapaSim}
           />
         )}
 
@@ -73,6 +74,8 @@ const Register = () => {
           <DadosPessoais
             handleNextYes={handleNextYes}
             handleBackYes={handleBackYes}
+            setEtapaSim={setEtapaSim}
+            etapaSim={etapaSim}
           />
         )}
 
@@ -80,6 +83,8 @@ const Register = () => {
           <DadosContato
             handleNextYes={handleNextYes}
             handleBackYes={handleBackYes}
+            setEtapaSim={setEtapaSim}
+            etapaSim={etapaSim}
           />
         )}
 
@@ -87,6 +92,8 @@ const Register = () => {
           <Transporte
             handleNextYes={handleNextYes}
             handleBackYes={handleBackYes}
+            setEtapaSim={setEtapaSim}
+            etapaSim={etapaSim}
           />
         )}
 
@@ -96,6 +103,8 @@ const Register = () => {
           <DadosPepsicoNao
             handleNextNo={handleNextNo}
             handleBackNo={handleBackNo}
+            setEtapaNao={setEtapaNao}
+            etapaNao={etapaNao}
           />
         )}
 
