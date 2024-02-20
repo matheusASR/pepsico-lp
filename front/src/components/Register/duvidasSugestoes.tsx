@@ -9,26 +9,31 @@ const DuvidasSugestoes = ({
 }: any) => {
   const { formData, setFormData } = useContext(FormContext);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setFinalFormData({ ...finalFormData, ...formData });
-    const filteredFormData = filterEmptyFields(finalFormData);
-    setFinalFormData(filteredFormData);
-    console.log(filteredFormData);
-  };
-
-  const filterEmptyFields = (data: any) => {
-    const filteredData: any = {};
-    for (const key in data) {
-      if (typeof data[key] === 'object' && data[key] !== null) {
-        filteredData[key] = filterEmptyFields(data[key]);
-      } else {
-        if (data[key] !== '') {
-          filteredData[key] = data[key];
+  const removeEmptyFields = (obj: any) => {
+    if (Array.isArray(obj)) {
+      return obj.filter((item) => item !== null && item !== undefined);
+    }
+    if (typeof obj === 'object' && obj !== null) {
+      const newObj: any = {};
+      for (const key in obj) {
+        const value = removeEmptyFields(obj[key]);
+        if (
+          (Array.isArray(value) && value.length > 0) ||
+          (!Array.isArray(value) && typeof value === 'object' && Object.keys(value).length > 0) || 
+          (!Array.isArray(value) && typeof value !== 'object' && value !== '') 
+        ) {
+          newObj[key] = value;
         }
       }
+      return newObj;
     }
-    return filteredData;
+    return obj;
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const filteredFormData = removeEmptyFields({ ...finalFormData, ...formData });
+    setFinalFormData(filteredFormData);
   };
 
   const backBttn = (e: any) => {

@@ -16,27 +16,53 @@ const Register = () => {
   const [etapaSim, setEtapaSim] = useState(1);
   const [etapaNao, setEtapaNao] = useState(1);
   const [finalFormData, setFinalFormData] = useState({});
-  const { formData, setFormData} = useContext(FormContext)
+  const { formData, setFormData } = useContext(FormContext);
+
+  const filterEmptyFields = (data: any) => {
+    const filteredData: any = {};
+    for (const key in data) {
+      if (typeof data[key] === "object" && data[key] !== null) {
+        filteredData[key] = filterEmptyFields(data[key]);
+      } else {
+        if (data[key] !== "") {
+          filteredData[key] = data[key];
+        }
+      }
+    }
+    return filteredData;
+  };
 
   useEffect(() => {
     console.log(finalFormData);
   }, [finalFormData]);
 
+  const clearFormData = (data: any) => {
+    for (const key in data) {
+      if (typeof data[key] === 'object') {
+        clearFormData(data[key]); 
+      } else {
+        data[key] = ''; 
+      }
+    }
+  };
+
   const handleConfirmacaoSubmit = (e: any) => {
     e.preventDefault();
     if (confirmacao === "Sim") {
       setEtapaSim(2);
+      clearFormData(formData);
       setFormData({
         ...formData,
         confirmacao: "Sim"
-      })
-      console.log(finalFormData)
+      });
+      console.log(finalFormData);
     } else {
       setEtapaNao(2);
+      clearFormData(formData);
       setFormData({
         ...formData,
-        confirmacao: "Não"
-      })
+        confirmacao: "Não",
+      });
     }
   };
 

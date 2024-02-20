@@ -5,23 +5,31 @@ import { FormContext } from "../../providers/FormContext";
 const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: any) => {
   const { formData, setFormData } = useContext(FormContext);
 
+  const removeEmptyFields = (obj: any) => {
+    if (Array.isArray(obj)) {
+      return obj.filter((item) => item !== null && item !== undefined);
+    }
+    if (typeof obj === 'object' && obj !== null) {
+      const newObj: any = {};
+      for (const key in obj) {
+        const value = removeEmptyFields(obj[key]);
+        if (
+          (Array.isArray(value) && value.length > 0) ||
+          (!Array.isArray(value) && typeof value === 'object' && Object.keys(value).length > 0) || 
+          (!Array.isArray(value) && typeof value !== 'object' && value !== '') 
+        ) {
+          newObj[key] = value;
+        }
+      }
+      return newObj;
+    }
+    return obj;
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setFinalFormData({ ...finalFormData, ...formData });
-    const filteredFormData = Object.fromEntries(
-      Object.entries(finalFormData).filter(([, value]) => {
-        if (typeof value === 'object' && value !== null) {
-          const nestedEntries = Object.entries(value);
-          const filteredNestedEntries = nestedEntries.filter(([_, nestedValue]) => nestedValue !== '');
-          return filteredNestedEntries.length > 0;
-        } else {
-          return value !== '';
-        }
-      })
-    );
-  
+    const filteredFormData = removeEmptyFields({ ...finalFormData, ...formData });
     setFinalFormData(filteredFormData);
-    console.log(filteredFormData);
   };
 
 
