@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { FormContext } from "../../providers/FormContext";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 const DuvidasSugestoes = ({
   finalFormData,
@@ -13,14 +15,16 @@ const DuvidasSugestoes = ({
     if (Array.isArray(obj)) {
       return obj.filter((item) => item !== null && item !== undefined);
     }
-    if (typeof obj === 'object' && obj !== null) {
+    if (typeof obj === "object" && obj !== null) {
       const newObj: any = {};
       for (const key in obj) {
         const value = removeEmptyFields(obj[key]);
         if (
           (Array.isArray(value) && value.length > 0) ||
-          (!Array.isArray(value) && typeof value === 'object' && Object.keys(value).length > 0) || 
-          (!Array.isArray(value) && typeof value !== 'object' && value !== '') 
+          (!Array.isArray(value) &&
+            typeof value === "object" &&
+            Object.keys(value).length > 0) ||
+          (!Array.isArray(value) && typeof value !== "object" && value !== "")
         ) {
           newObj[key] = value;
         }
@@ -30,10 +34,53 @@ const DuvidasSugestoes = ({
     return obj;
   };
 
-  const handleSubmit = (e: any) => {
+  const transformData = (inputData: any) => {
+    const {
+      dadosPepsicoSim,
+      dadosPessoais,
+      dadosContato,
+      transporte,
+      duvidaSugestao,
+    } = inputData;
+
+    return {
+      ...dadosPepsicoSim,
+      ...dadosPessoais,
+      ...dadosContato,
+      ...transporte,
+      duvidaSugestao,
+    };
+  };
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const filteredFormData = removeEmptyFields({ ...finalFormData, ...formData });
-    setFinalFormData(filteredFormData);
+    const filteredFormData = removeEmptyFields({
+      ...finalFormData,
+      ...formData,
+    });
+    const ffd = transformData(filteredFormData);
+    setFinalFormData(ffd);
+    try {
+      const response = await api.post("comparecimento/", ffd);
+      if (response && response.data && response.statusText === "Created") {
+        toast.success("Usuário inscrito com sucesso!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        toast.error(
+          "Erro ao cadastrar o usuário. Verifique os dados e tente novamente."
+        );
+      }
+    } catch (error: any) {
+      if (error.response.data.email) {
+        toast.error(
+          `Ocorreu um erro ao se inscrever: ${error.response.data.email}`
+        );
+      } else {
+        toast.error(`Ocorreu um erro ao se inscrever: ${error.response.data}`);
+      }
+    }
   };
 
   const backBttn = (e: any) => {
@@ -47,9 +94,7 @@ const DuvidasSugestoes = ({
     setEtapaSim(etapaSim - 1);
   };
 
-  const handleTextareaChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setFormData({
       ...formData,

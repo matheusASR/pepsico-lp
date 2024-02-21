@@ -1,8 +1,12 @@
 import { useContext } from "react";
-import { FormContext } from "../../../providers/FormContext";
+import { FormContext } from "../../providers/FormContext";
 
-
-const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
+const DadosContato = ({
+  etapaSim,
+  setEtapaSim,
+  setFinalFormData,
+  finalFormData,
+}: any) => {
   const { formData, setFormData } = useContext(FormContext);
 
   const handleSubmit = (e: any) => {
@@ -11,8 +15,8 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
     setFinalFormData({ ...finalFormData, ...formData });
   };
 
-  const backBttn = (e:any) => {
-    e.preventDefault()
+  const backBttn = (e: any) => {
+    e.preventDefault();
     const formKey = "dadosContato";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };
@@ -153,7 +157,7 @@ const DadosContato = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }
           <button className="back__bttn" onClick={backBttn}>
             VOLTAR
           </button>
-          <button type="submit" className="continue__bttn" >
+          <button type="submit" className="continue__bttn">
             CONTINUAR
           </button>
         </div>

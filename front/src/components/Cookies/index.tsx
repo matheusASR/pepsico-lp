@@ -3,7 +3,7 @@ import { StyledCookies } from "./style";
 import COOKIEIMG from "../../assets/COOKIEIMG.png";
 
 const Cookies = () => {
-  const [openCookies, setOpenCookies] = useState(true);
+  const [openCookies, setOpenCookies] = useState(false);
 
   const handleCookies = () => {
     setOpenCookies(false)

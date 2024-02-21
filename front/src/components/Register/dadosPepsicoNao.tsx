@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { FormContext } from "../../../../providers/FormContext.tsx"
+import { FormContext } from "../../providers/FormContext.tsx";
 
-const DadosPepsicoSim = ({
-  setEtapaSim,
-  etapaSim,
+const DadosPepsicoNao = ({
+  setEtapaNao,
+  etapaNao,
   setFinalFormData,
   finalFormData,
 }: any) => {
@@ -27,27 +27,27 @@ const DadosPepsicoSim = ({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setEtapaSim(etapaSim + 1);
+    setEtapaNao(etapaNao + 1);
     setFinalFormData({ ...finalFormData, ...formData });
   };
 
   const backBttn = (e: any) => {
     e.preventDefault();
-    const formKey = "dadosPepsicoSim";
+    const formKey = "dadosPepsicoNao";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };
       delete updatedFinalFormData[formKey];
       setFinalFormData(updatedFinalFormData);
     }
-    setEtapaSim(etapaSim - 1);
+    setEtapaNao(etapaNao - 1);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      dadosPepsicoSim: {
-        ...formData.dadosPepsicoSim,
+      dadosPepsicoNao: {
+        ...formData.dadosPepsicoNao,
         [name]: value,
       },
     });
@@ -57,8 +57,8 @@ const DadosPepsicoSim = ({
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      dadosPepsicoSim: {
-        ...formData.dadosPepsicoSim,
+      dadosPepsicoNao: {
+        ...formData.dadosPepsicoNao,
         [name]: value,
       },
     });
@@ -69,7 +69,7 @@ const DadosPepsicoSim = ({
       <div className="form__register__top">
         <h2 className="form__register__title">Dados Pepsico</h2>
         <p className="form__register__step">
-          Step <strong className="form__register__step">2</strong>/6
+          Step <strong className="form__register__step">2</strong>/3
         </p>
       </div>
       <form className="pepsico__form" onSubmit={handleSubmit}>
@@ -79,7 +79,7 @@ const DadosPepsicoSim = ({
               className="regular__input"
               type="text"
               placeholder="Nome Completo *"
-              value={formData.dadosPepsicoSim.nomeCompleto}
+              value={formData.dadosPepsicoNao.nomeCompleto}
               onChange={handleInputChange}
               name="nomeCompleto"
               required
@@ -88,16 +88,16 @@ const DadosPepsicoSim = ({
               className="regular__input"
               type="text"
               placeholder="GPID *"
-              value={formData.dadosPepsicoSim.gpid}
+              value={formData.dadosPepsicoNao.gpid}
               onChange={handleInputChange}
               name="gpid"
               required
             />
             <input
               className="regular__input"
-              type="text"
+              type="email"
               placeholder="E-mail *"
-              value={formData.dadosPepsicoSim.email}
+              value={formData.dadosPepsicoNao.email}
               onChange={handleInputChange}
               name="email"
               required
@@ -108,14 +108,14 @@ const DadosPepsicoSim = ({
               className="regular__input"
               type="text"
               placeholder="Departamento *"
-              value={formData.dadosPepsicoSim.departamento}
+              value={formData.dadosPepsicoNao.departamento}
               onChange={handleInputChange}
               name="departamento"
               required
             />
             <select
               className="regular__input"
-              value={formData.dadosPepsicoSim.regiao}
+              value={formData.dadosPepsicoNao.regiao}
               onChange={handleSelectChange}
               name="regiao"
               required
@@ -129,7 +129,7 @@ const DadosPepsicoSim = ({
             </select>
             <select
               className="regular__input"
-              value={formData.dadosPepsicoSim.nivel}
+              value={formData.dadosPepsicoNao.nivel}
               onChange={handleSelectChange}
               name="nivel"
               required
@@ -156,4 +156,4 @@ const DadosPepsicoSim = ({
   );
 };
 
-export default DadosPepsicoSim;
+export default DadosPepsicoNao;

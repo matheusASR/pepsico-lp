@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { StyledRegister } from "./style";
-import DadosPessoais from "./DadosPessoais/dadosPessoais";
-import DadosContato from "./DadosContato/dadosContato";
-import DadosPepsicoNao from "./DadosPepsico/Nao/dadosPepsicoNao";
-import DadosPepsicoSim from "./DadosPepsico/Sim/dadosPepsicoSim";
+import DadosPessoais from "./dadosPessoais";
+import DadosContato from "./dadosContato";
+import DadosPepsicoNao from "./dadosPepsicoNao";
+import DadosPepsicoSim from "./dadosPepsicoSim";
 import Declinio from "./declinio";
 import DuvidasSugestoes from "./duvidasSugestoes";
 import Transporte from "./transporte";
@@ -32,16 +32,12 @@ const Register = () => {
     return filteredData;
   };
 
-  useEffect(() => {
-    console.log(finalFormData)
-  }, [finalFormData]);
-
   const clearFormData = (data: any) => {
     for (const key in data) {
-      if (typeof data[key] === 'object') {
-        clearFormData(data[key]); 
+      if (typeof data[key] === "object") {
+        clearFormData(data[key]);
       } else {
-        data[key] = ''; 
+        data[key] = "";
       }
     }
   };

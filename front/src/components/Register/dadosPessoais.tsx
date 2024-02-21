@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FormContext } from "../../../providers/FormContext";
+import { FormContext } from "../../providers/FormContext";
 
 const DadosPessoais = ({
   setEtapaSim,
@@ -7,12 +7,17 @@ const DadosPessoais = ({
   setFinalFormData,
   finalFormData,
 }: any) => {
-
   const generos = ["Masculino", "Feminino", "Outro"];
   const tamanhos = ["P", "M", "G", "GG", "EXG"];
 
-  const { formData, setFormData, needHelp, setNeedHelp, foodRestriction, setFoodRestriction } = useContext(FormContext);
-  
+  const {
+    formData,
+    setFormData,
+    needHelp,
+    setNeedHelp,
+    foodRestriction,
+    setFoodRestriction,
+  } = useContext(FormContext);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -49,8 +54,14 @@ const DadosPessoais = ({
       dadosPessoais: {
         ...formData.dadosPessoais,
         [name]: value,
-        restricaoAlimentarRazao: name === "restricaoAlimentar" && value === "Não" ? "" : formData.dadosPessoais.restricaoAlimentarRazao,
-        necessidadeRazao: name === "necessidade" && value === "Não" ? "" : formData.dadosPessoais.necessidadeRazao,
+        restricaoAlimentarRazao:
+          name === "restricaoAlimentar" && value === "Não"
+            ? ""
+            : formData.dadosPessoais.restricaoAlimentarRazao,
+        necessidadeRazao:
+          name === "necessidade" && value === "Não"
+            ? ""
+            : formData.dadosPessoais.necessidadeRazao,
       },
     });
   };
@@ -88,7 +99,7 @@ const DadosPessoais = ({
 
             <input
               className="regular__input"
-              type="text"
+              type="date"
               placeholder="Data de Nascimento *"
               value={formData.dadosPessoais.dataNascimento}
               onChange={handleInputChange}
@@ -135,7 +146,7 @@ const DadosPessoais = ({
                 if (e.target.value === "Sim") {
                   setFoodRestriction(true);
                 } else {
-                  setFoodRestriction(false)
+                  setFoodRestriction(false);
                 }
               }}
               name="restricaoAlimentar"
@@ -164,7 +175,7 @@ const DadosPessoais = ({
                 if (e.target.value === "Sim") {
                   setNeedHelp(true);
                 } else {
-                  setNeedHelp(false)
+                  setNeedHelp(false);
                 }
               }}
               name="necessidade"

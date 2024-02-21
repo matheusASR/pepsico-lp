@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { FormContext } from "../../providers/FormContext";
+import { toast } from "react-toastify";
+import { api } from "../../services/api";
 
 
 const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: any) => {
@@ -26,10 +28,42 @@ const Declinio = ({ etapaNao, setEtapaNao, setFinalFormData, finalFormData }: an
     return obj;
   };
 
-  const handleSubmit = (e: any) => {
+  const transformData = (inputData: any) => {
+    const {
+        dadosPepsicoNao,
+        motivoDeclinio
+    } = inputData;
+
+    return {
+        ...dadosPepsicoNao,
+        motivoDeclinio
+    };
+  }
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const filteredFormData = removeEmptyFields({ ...finalFormData, ...formData });
-    setFinalFormData(filteredFormData);
+    const ffd = transformData(filteredFormData);
+    setFinalFormData(ffd)
+    try {
+      const response = await api.post("naocomparecimento/", ffd);
+      if (response && response.data && response.statusText === "Created") {
+        toast.success("Usuário inscrito com sucesso!")
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+      } else {
+        toast.error(
+          "Erro ao cadastrar o usuário. Verifique os dados e tente novamente."
+        );
+      }
+    } catch (error: any) {
+      if (error.response.data.email) {
+        toast.error(`Ocorreu um erro ao se inscrever: ${error.response.data.email}`);
+      } else {
+        toast.error(`Ocorreu um erro ao se inscrever: ${error.response.data}`);
+      }
+    }
   };
 
 
