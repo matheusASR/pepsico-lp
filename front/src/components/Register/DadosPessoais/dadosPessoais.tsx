@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FormContext } from "../../../providers/FormContext";
 
 const DadosPessoais = ({
@@ -7,12 +7,12 @@ const DadosPessoais = ({
   setFinalFormData,
   finalFormData,
 }: any) => {
+
   const generos = ["Masculino", "Feminino", "Outro"];
   const tamanhos = ["P", "M", "G", "GG", "EXG"];
-  const [foodRestriction, setFoodRestriction] = useState(false);
-  const [needHelp, setNeedHelp] = useState(false);
 
-  const { formData, setFormData } = useContext(FormContext);
+  const { formData, setFormData, needHelp, setNeedHelp, foodRestriction, setFoodRestriction } = useContext(FormContext);
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -49,6 +49,8 @@ const DadosPessoais = ({
       dadosPessoais: {
         ...formData.dadosPessoais,
         [name]: value,
+        restricaoAlimentarRazao: name === "restricaoAlimentar" && value === "Não" ? "" : formData.dadosPessoais.restricaoAlimentarRazao,
+        necessidadeRazao: name === "necessidade" && value === "Não" ? "" : formData.dadosPessoais.necessidadeRazao,
       },
     });
   };
@@ -132,6 +134,8 @@ const DadosPessoais = ({
                 handleSelectChange(e);
                 if (e.target.value === "Sim") {
                   setFoodRestriction(true);
+                } else {
+                  setFoodRestriction(false)
                 }
               }}
               name="restricaoAlimentar"
@@ -159,6 +163,8 @@ const DadosPessoais = ({
                 handleSelectChange(e);
                 if (e.target.value === "Sim") {
                   setNeedHelp(true);
+                } else {
+                  setNeedHelp(false)
                 }
               }}
               name="necessidade"

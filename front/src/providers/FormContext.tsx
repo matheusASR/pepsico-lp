@@ -52,6 +52,10 @@ interface FormData {
 interface FormContextType {
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  needHelp: boolean;
+  setNeedHelp: (value: boolean) => void;
+  foodRestriction: boolean;
+  setFoodRestriction: (value: boolean) => void;
 }
 
 export const FormContext = createContext<FormContextType>({
@@ -103,9 +107,16 @@ export const FormContext = createContext<FormContextType>({
     motivoDeclinio: "",
   },
   setFormData: () => {},
+  foodRestriction: false, 
+  setFoodRestriction: () => {},
+  needHelp: false, 
+  setNeedHelp: () => {}
 });
 
 export const FormProvider = ({ children }: any) => {
+  const [foodRestriction, setFoodRestriction] = useState(false)
+  const [needHelp, setNeedHelp] = useState(false)
+
   const [formData, setFormData] = useState<FormContextType["formData"]>({
     dadosPepsicoSim: {
       nomeCompleto: "",
@@ -155,7 +166,7 @@ export const FormProvider = ({ children }: any) => {
   });
 
   return (
-    <FormContext.Provider value={{ formData, setFormData }}>
+    <FormContext.Provider value={{ formData, setFormData, foodRestriction, setFoodRestriction, needHelp, setNeedHelp }}>
       {children}
     </FormContext.Provider>
   );
