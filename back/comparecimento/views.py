@@ -9,17 +9,17 @@ class ComparecimentoView(ListCreateAPIView):
     queryset = Comparecimento.objects.all()
     serializer_class = ComparecimentoSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            self.perform_create(serializer)
-            email = serializer.validated_data.get('email')  # Supondo que o campo do email seja 'email'
-            send_mail(
-                'Assunto do Email',
-                'Corpo do Email',
-                'matheusau2004@example.com',  # Remetente do e-mail
-                [email],  # Destinatário do e-mail
-                fail_silently=False,
-            )
-            return Response(serializer.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    # def post(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     if serializer.is_valid():
+    #         self.perform_create(serializer)
+    #         email = serializer.validated_data.get('email')  # Supondo que o campo do email seja 'email'
+    #         send_mail(
+    #             'Assunto do Email',
+    #             'Corpo do Email',
+    #             'matheusau2004@gmail.com',
+    #             [email], 
+    #             fail_silently=False,
+    #         )
+    #         return Response(serializer.data, status=HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
