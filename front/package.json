@@ -5,9 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build && npm run build-backend",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
+  },
+  "output": {
+    "root": "public",
+    "backend": "back/build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
