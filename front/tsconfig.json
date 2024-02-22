@@ -17,6 +17,6 @@
       "jsx": "react-jsx",
       "allowImportingTsExtensions": true
     },
-    "include": ["src", "src/declarations.d.ts"],
+    "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
   }
