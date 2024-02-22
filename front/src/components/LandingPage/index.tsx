@@ -1,11 +1,11 @@
-import Header from "../components/Header";
+import Header from "../Header";
 import { StyledLandingPage } from "./style";
 import PepsicoBigImage from "../assets/pepsico-img-big.jpg";
-import About from "../components/About";
-import Register from "../components/Register";
-import Footer from "../components/Footer";
+import About from "../About";
+import Register from "../Register";
+import Footer from "../Footer";
 import ARROWTOP from "../assets/ARROWTOP.png";
-import Cookies from "../components/Cookies";
+import Cookies from "../Cookies";
 
 const LandingPage = () => {
   const scrollToSection = (id: any) => {
@@ -36,14 +36,10 @@ const LandingPage = () => {
         onClick={() => scrollToSection("section1")}
         className="gotop__bttn"
       >
-        <img
-          className="arrow__top"
-          src={ARROWTOP}
-          alt="seta-para-cima"
-        />
+        <img className="arrow__top" src={ARROWTOP} alt="seta-para-cima" />
       </button>
       <Footer />
-      <Cookies/>
+      <Cookies />
     </StyledLandingPage>
   );
 };
