@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "front", 
+        "src": "front/package.json", 
         "use": "@vercel/static-build",
         "config": {
           "outputDirectory": "front-build" 
         }
       },
       {
-        "src": "back",
+        "src": "back/pepsico_back/wsgi.py",
         "use": "@vercel/python", 
         "config": {
           "maxLambdaSize": "1024mb" 
@@ -18,12 +18,12 @@
     ],
     "routes": [
       {
-        "src": "/projeto/front/(.*)",
-        "dest": "/front-build/$1" 
+        "src": "/pepsico-lp/front/(.*)",
+        "dest": "/front/index.html" 
       },
       {
-        "src": "/projeto/back/(.*)", 
-        "dest": "/back/$1" 
+        "src": "/pepsico-lp/back/(.*)", 
+        "dest": "/back/pepsico_back/wsgi.py" 
       },
       {
         "src": "/(.*)",

@@ -23,7 +23,7 @@ const DadosPepsicoNao = ({
     "ÁREA CONVIDADA",
   ];
 
-  const { formData, setFormData } = useContext(FormContext);
+  const { formData, setFormData }: any = useContext(FormContext);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
