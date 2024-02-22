@@ -1,10 +1,10 @@
 import Header from "../Header";
 import { StyledLandingPage } from "./style";
-import PepsicoBigImage from "../assets/pepsico-img-big.jpg";
+import PepsicoBigImage from "../../assets/pepsico-img-big.jpg";
 import About from "../About";
 import Register from "../Register";
 import Footer from "../Footer";
-import ARROWTOP from "../assets/ARROWTOP.png";
+import ARROWTOP from "../../assets/ARROWTOP.png";
 import Cookies from "../Cookies";
 
 const LandingPage = () => {
