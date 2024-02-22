@@ -107,15 +107,15 @@ export const FormContext = createContext<FormContextType>({
     motivoDeclinio: "",
   },
   setFormData: () => {},
-  foodRestriction: false, 
+  foodRestriction: false,
   setFoodRestriction: () => {},
-  needHelp: false, 
-  setNeedHelp: () => {}
+  needHelp: false,
+  setNeedHelp: () => {},
 });
 
 export const FormProvider = ({ children }: any) => {
-  const [foodRestriction, setFoodRestriction] = useState(false)
-  const [needHelp, setNeedHelp] = useState(false)
+  const [foodRestriction, setFoodRestriction] = useState(false);
+  const [needHelp, setNeedHelp] = useState(false);
 
   const [formData, setFormData] = useState<FormContextType["formData"]>({
     dadosPepsicoSim: {
@@ -166,7 +166,16 @@ export const FormProvider = ({ children }: any) => {
   });
 
   return (
-    <FormContext.Provider value={{ formData, setFormData, foodRestriction, setFoodRestriction, needHelp, setNeedHelp }}>
+    <FormContext.Provider
+      value={{
+        formData,
+        setFormData,
+        foodRestriction,
+        setFoodRestriction,
+        needHelp,
+        setNeedHelp,
+      }}
+    >
       {children}
     </FormContext.Provider>
   );

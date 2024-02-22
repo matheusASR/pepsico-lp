@@ -1,18 +1,22 @@
 import { useContext } from "react";
 import { FormContext } from "../../providers/FormContext";
 
-
-const Transporte = ({ etapaSim, setEtapaSim, setFinalFormData, finalFormData }: any) => {
+const Transporte = ({
+  etapaSim,
+  setEtapaSim,
+  setFinalFormData,
+  finalFormData,
+}: any) => {
   const { formData, setFormData } = useContext(FormContext);
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
-    setEtapaSim(etapaSim + 1)
-    setFinalFormData({...finalFormData, ...formData})
+    e.preventDefault();
+    setEtapaSim(etapaSim + 1);
+    setFinalFormData({ ...finalFormData, ...formData });
   };
 
-  const backBttn = (e:any) => {
-    e.preventDefault()
+  const backBttn = (e: any) => {
+    e.preventDefault();
     const formKey = "transporte";
     if (finalFormData.hasOwnProperty(formKey)) {
       const updatedFinalFormData = { ...finalFormData };

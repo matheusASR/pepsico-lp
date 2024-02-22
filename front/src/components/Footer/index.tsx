@@ -14,7 +14,10 @@ const Footer = () => {
             href="https://api.whatsapp.com/send?1=pt_BR&phone=5511997759828"
             target="_blank"
           >
-            Dúvidas sobre o evento? <br></br><span className="doubt__contact underline">WhatsApp: (11) 99775-9828</span>
+            Dúvidas sobre o evento? <br></br>
+            <span className="doubt__contact underline">
+              WhatsApp: (11) 99775-9828
+            </span>
           </a>
           <p className="copyright-text">© Copyright 2024 - PepsiCo </p>{" "}
         </div>

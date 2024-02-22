@@ -1,9 +1,17 @@
-const Confirmacao = ({ handleConfirmacaoSubmit, step, setStep, confirmacao, setConfirmacao }: any) => {
+const Confirmacao = ({
+  handleConfirmacaoSubmit,
+  step,
+  setStep,
+  confirmacao,
+  setConfirmacao,
+}: any) => {
   return (
     <>
       <div className="form__register__top">
         <h2 className="form__register__title">Confirmação de Presença</h2>
-        <p className="form__register__step">Step <strong className="form__register__step">1</strong>/{step}</p>
+        <p className="form__register__step">
+          Step <strong className="form__register__step">1</strong>/{step}
+        </p>
       </div>
       <div className="form__confirm">
         <label className="label__pattern">

@@ -6,8 +6,8 @@ const Cookies = () => {
   const [openCookies, setOpenCookies] = useState(false);
 
   const handleCookies = () => {
-    setOpenCookies(false)
-  }
+    setOpenCookies(false);
+  };
 
   return (
     <StyledCookies>
@@ -44,8 +44,12 @@ const Cookies = () => {
           </p>
           <div className="divbottom__cookies">
             <button className="orange underline">My options</button>
-            <button onClick={handleCookies} className="reject__bttn">Rejeitar</button>
-            <button onClick={handleCookies} className="accept__bttn">Accept</button>
+            <button onClick={handleCookies} className="reject__bttn">
+              Rejeitar
+            </button>
+            <button onClick={handleCookies} className="accept__bttn">
+              Accept
+            </button>
           </div>
         </div>
       ) : null}
