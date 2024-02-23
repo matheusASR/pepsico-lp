@@ -1,0 +1,1 @@
+web: gunicorn pepsico_back.wsgi --log-file -
